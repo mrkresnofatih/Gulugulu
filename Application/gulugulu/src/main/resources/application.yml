@@ -1,0 +1,6 @@
+cloud:
+  aws:
+    credentials:
+      access: access
+      secret: secret
+      region: region

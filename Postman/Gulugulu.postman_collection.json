@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "ed433c47-9bad-4936-83ad-5b792ac22d72",
+		"name": "Gulugulu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13142924"
+	},
+	"item": [
+		{
+			"name": "UserProfile",
+			"item": [
+				{
+					"name": "GetUserProfile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user-profile/get/kevindurant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user-profile",
+								"get",
+								"kevindurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUserProfile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"fullname\": \"LeBron James\",\r\n    \"email\": \"lebronjames@lalakers.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user-profile/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user-profile",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
