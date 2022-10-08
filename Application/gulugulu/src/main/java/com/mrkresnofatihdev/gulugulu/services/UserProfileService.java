@@ -1,8 +1,7 @@
 package com.mrkresnofatihdev.gulugulu.services;
 
-import com.mrkresnofatihdev.gulugulu.models.UserProfileEntity;
-import com.mrkresnofatihdev.gulugulu.models.UserProfileCreateRequestModel;
-import com.mrkresnofatihdev.gulugulu.models.UserProfileGetResponseModel;
+import com.mrkresnofatihdev.gulugulu.exceptions.RecordNotFoundException;
+import com.mrkresnofatihdev.gulugulu.models.*;
 import com.mrkresnofatihdev.gulugulu.utilities.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +13,8 @@ import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
+
+import java.util.Objects;
 
 @Service
 public class UserProfileService implements IUserProfileService {
@@ -32,7 +33,7 @@ public class UserProfileService implements IUserProfileService {
                 .build();
     }
 
-    private String _GetUserInfoPartitionAndSortKey(String username) {
+    private String _GetUserProfilePartitionAndSortKey(String username) {
         return String.format("user-profile#%s", username);
     }
 
@@ -61,27 +62,63 @@ public class UserProfileService implements IUserProfileService {
     }
 
     @Override
-    public UserProfileGetResponseModel GetUserProfile(String username) {
-        logger.info(String.format("Starting Method: GetUserProfile w/ Param: %s", username));
+    public UserProfileGetResponseModel GetUserProfile(UserProfileGetRequestModel userProfileGetRequest) {
+        logger.info(String.format("Starting Method: GetUserProfile w/ Param: %s", userProfileGetRequest.toJsonSerialized()));
         try {
             var enhancedClient = _GetDynamoDbEnhancedClient();
             DynamoDbTable<UserProfileEntity> userProfileTable = enhancedClient
                     .table(Constants.DynamoDbTableName, TableSchema.fromBean(UserProfileEntity.class));
-            var partitionSortKey = _GetUserInfoPartitionAndSortKey(username);
+            var partitionSortKey = _GetUserProfilePartitionAndSortKey(userProfileGetRequest.getUsername());
             var userProfileKey = Key.builder()
                     .partitionValue(partitionSortKey)
                     .sortValue(partitionSortKey)
                     .build();
             var foundUserProfile = userProfileTable.getItem(r -> r.key(userProfileKey));
+            if (Objects.isNull(foundUserProfile)) {
+                throw new RecordNotFoundException();
+            }
             var returnUserProfile = new UserProfileGetResponseModel(foundUserProfile);
             logger.info("Finishing Method: GetUserProfile");
             return returnUserProfile;
         } catch (DynamoDbException e) {
             logger.error("DynamoDB error at GetUserProfile");
             throw e;
-        } catch (NullPointerException e) {
-            logger.error("NullPointer error at GetUserProfile");
+        } catch (RecordNotFoundException e) {
+            logger.error("RecordNotFound error at GetUserProfile");
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public UserProfileGetResponseModel UpdateUserProfile(UserProfileUpdateRequestModel userProfileUpdateRequest) {
+        logger.info(String.format("Starting Method: UpdateUserProfile w/ Param: %s", userProfileUpdateRequest.toJsonSerialized()));
+        try {
+            var enhancedClient = _GetDynamoDbEnhancedClient();
+            DynamoDbTable<UserProfileEntity> userProfileTable = enhancedClient
+                    .table(Constants.DynamoDbTableName, TableSchema.fromBean(UserProfileEntity.class));
+            var partitionSortKey = _GetUserProfilePartitionAndSortKey(userProfileUpdateRequest.getUsername());
+            var userProfileKey = Key.builder()
+                    .partitionValue(partitionSortKey)
+                    .sortValue(partitionSortKey)
+                    .build();
+            var foundUserProfile = userProfileTable.getItem(r -> r.key(userProfileKey));
+            if (Objects.isNull(foundUserProfile)) {
+                throw new RecordNotFoundException();
+            }
+            foundUserProfile.setAvatar(userProfileUpdateRequest.getAvatar());
+            foundUserProfile.setBio(userProfileUpdateRequest.getBio());
+            foundUserProfile.setFullname(userProfileUpdateRequest.getFullname());
+            userProfileTable.updateItem(r -> r.item(foundUserProfile));
+            logger.info("Finishing Method: UpdateUserProfile");
+            return new UserProfileGetResponseModel(foundUserProfile);
+        }
+        catch (DynamoDbException e) {
+            logger.info("DynamoDB error at UpdateUserProfile");
             throw e;
+        }
+        catch (RecordNotFoundException e) {
+            logger.info("RecordNotFound error at UpdateUserProfile");
+            throw new RuntimeException(e);
         }
     }
 }

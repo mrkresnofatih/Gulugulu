@@ -3,4 +3,12 @@ cloud:
     credentials:
       access: access
       secret: secret
-      region: region
+      region: ap-southeast-3
+spring:
+  application:
+    name: guluguluapp
+gulugulu:
+  crypto:
+    saltformat: A4GxlHFcmS%spsvcz7q8BN
+  jwt:
+    secret: TpVsBJhfWmO99pWhppnmrNfcGRtLXGeNb2Pz9vAuQb8QjxBqzABc1o74BBQI

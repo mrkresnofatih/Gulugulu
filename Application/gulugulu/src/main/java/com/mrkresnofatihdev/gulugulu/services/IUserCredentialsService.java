@@ -1,0 +1,13 @@
+package com.mrkresnofatihdev.gulugulu.services;
+
+import com.mrkresnofatihdev.gulugulu.models.UserCredentialsCreateRequestModel;
+import com.mrkresnofatihdev.gulugulu.models.UserCredentialsGetRequestModel;
+import com.mrkresnofatihdev.gulugulu.models.UserCredentialsGetResponseModel;
+
+public interface IUserCredentialsService {
+    UserCredentialsGetResponseModel SaveUserCredentials(UserCredentialsCreateRequestModel userCredentialsCreateRequest);
+
+    UserCredentialsGetResponseModel GetUserCredentials(UserCredentialsGetRequestModel userCredentialsGetRequest);
+
+    UserCredentialsGetResponseModel UpdateUserCredentials(UserCredentialsCreateRequestModel userCredentialsUpdateRequest);
+}
