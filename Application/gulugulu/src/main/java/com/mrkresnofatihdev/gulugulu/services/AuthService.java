@@ -36,7 +36,10 @@ public class AuthService implements IAuthService {
         var foundUserCredentials = userCredentialsService.GetUserCredentials(getUserCredReq);
         var isPasswordValid = hashHelper.CheckHash(userLoginReq.getPassword(), foundUserCredentials.getPassword());
         if (isPasswordValid) {
-            var getTokenResponse = jwtHelper.GetToken(foundUserCredentials.getUsername());
+            logger.info("Password is valid!");
+            var identityUserProfile = identityProfileService
+                    .GetForUser(new IdentityUserProfileCreateRequestModel(userLoginReq.getUsername()));
+            var getTokenResponse = jwtHelper.GetToken(identityUserProfile.getIdentityName());
             if (!Objects.isNull(getTokenResponse.getErrorMessage())) {
                 logger.error("Get token response error message is not null");
                 throw new RuntimeException(new Exception("Failed To Generate Token"));

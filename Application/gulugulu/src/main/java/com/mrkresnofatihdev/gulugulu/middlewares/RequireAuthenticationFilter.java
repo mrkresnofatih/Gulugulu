@@ -38,6 +38,7 @@ public class RequireAuthenticationFilter implements Filter {
         var httpRequest = (HttpServletRequest) servletRequest;
         var uri = httpRequest.getRequestURI();
         if (!_MustGoThruAuthentication(uri)) {
+            logger.info("No authentication needed, auth successful!");
             filterChain.doFilter(servletRequest, servletResponse);
             logger.info("Finishing Method: doFilter!");
             return;

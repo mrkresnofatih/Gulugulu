@@ -3,10 +3,26 @@ package com.mrkresnofatihdev.gulugulu.models;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class UserProfileUpdateRequestModel implements IJsonSerializable {
+    @NotNull(message = "Username must not be null")
+    @NotEmpty(message = "Username must not be empty")
+    @Size(min = 6, max = 30, message = "Username must be 6-30 chars")
     private String username;
+
+    @NotNull(message = "Fullname must not be null")
+    @NotEmpty(message = "Fullname must not be empty")
     private String fullname;
+
+    @NotNull(message = "Avatar must not be null")
+    @NotEmpty(message = "Avatar must not be empty")
     private String avatar;
+
+    @NotNull(message = "Bio must not be null")
+    @NotEmpty(message = "Bio must not be empty")
     private String bio;
 
     public UserProfileUpdateRequestModel() {

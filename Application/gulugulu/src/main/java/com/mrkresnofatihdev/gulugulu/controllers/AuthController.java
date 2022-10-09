@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
@@ -33,13 +35,13 @@ public class AuthController {
     }
 
     @PostMapping("/user-login")
-    public ResponseEntity<ResponseModel<AuthUserLoginResponseModel>> UserLogin(@RequestBody AuthUserLoginRequestModel loginReq) {
+    public ResponseEntity<ResponseModel<AuthUserLoginResponseModel>> UserLogin(@Valid @RequestBody AuthUserLoginRequestModel loginReq) {
         var loginResponse = authService.UserLogin(loginReq);
         return ResponseHelper.BuildOkResponse(loginResponse);
     }
 
     @PostMapping("/user-signup")
-    public ResponseEntity<ResponseModel<String>> UserSignup(@RequestBody AuthUserSignupRequestModel authUserSignupRequestModel) {
+    public ResponseEntity<ResponseModel<String>> UserSignup(@Valid @RequestBody AuthUserSignupRequestModel authUserSignupRequestModel) {
         rabbitTemplate.convertAndSend(guluguluExchange.getName(), "userSignupHandlerRoute", authUserSignupRequestModel);
         return ResponseHelper.BuildOkResponse("User Signup Initialized!");
     }
