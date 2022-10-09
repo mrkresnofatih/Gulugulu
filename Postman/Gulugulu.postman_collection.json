@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjUyOTc0MDgsImlkZW50aXR5TmFtZSI6InRyYWV5b3VuZyIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9._zgbXl9jlL2VugLCJNUUCExypJvBal2GGdszuB-1rZE",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjUzNTk1MDEsImlkZW50aXR5TmFtZSI6InVzZXIja29iZWJyeWFudCIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9.n4exfeJaOV3LZk87_SFWZ7DtZn6hAVIuYrRwLjgt-Q8",
 									"type": "string"
 								}
 							]
@@ -26,7 +26,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"fullname\": \"Trae Young\",\r\n    \"avatar\": \"https://i.imgur.com/hlMIFj7.jpg\",\r\n    \"bio\": \"Ice cold trae!\"\r\n}",
+							"raw": "{\r\n    \"username\": \"kobebryant\",\r\n    \"fullname\": \"Kobe Bryant\",\r\n    \"avatar\": \"https://i.imgur.com/hlMIFj7.jpg\",\r\n    \"bio\": \"Black Mamba!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -58,7 +58,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjUyOTc0MDgsImlkZW50aXR5TmFtZSI6InRyYWV5b3VuZyIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9._zgbXl9jlL2VugLCJNUUCExypJvBal2GGdszuB-1rZE",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjUzNTk1MDEsImlkZW50aXR5TmFtZSI6InVzZXIja29iZWJyeWFudCIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9.n4exfeJaOV3LZk87_SFWZ7DtZn6hAVIuYrRwLjgt-Q8",
 									"type": "string"
 								}
 							]
@@ -104,7 +104,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjUyOTc2ODgsImlkZW50aXR5TmFtZSI6InRyYWV5b3VuZyIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9.n0M0TFEb3MNWNV5d23k6s3wIZCtKTQ_aLEJw4CHlIqY",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjUzNTk1MDEsImlkZW50aXR5TmFtZSI6InVzZXIja29iZWJyeWFudCIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9.n4exfeJaOV3LZk87_SFWZ7DtZn6hAVIuYrRwLjgt-Q8",
 									"type": "string"
 								}
 							]
@@ -113,7 +113,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"password\": \"Pwd1234567#\"\r\n}",
+							"raw": "{\r\n    \"username\": \"kobebryant\",\r\n    \"password\": \"Pwd123#\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -149,7 +149,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"password\": \"Pwd1234567#\"\r\n}",
+							"raw": "{\r\n    \"username\": \"kobebryant\",\r\n    \"password\": \"Pwd123#\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -180,7 +180,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"fullname\": \"LeBron James\",\r\n    \"password\": \"Pwd1234#\",\r\n    \"email\": \"lebronjames@lalakers.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"kobebryant\",\r\n    \"fullname\": \"Kobe Bryant\",\r\n    \"password\": \"Pwd1234567#\",\r\n    \"email\": \"kobebrynt@lal.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
