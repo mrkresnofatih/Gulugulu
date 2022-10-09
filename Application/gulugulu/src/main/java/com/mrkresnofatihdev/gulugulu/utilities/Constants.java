@@ -25,4 +25,19 @@ public class Constants {
 
         public static final String JwtTknIssuer = "Gulugulu.com";
     }
+
+    public static class Rabbit
+    {
+        public static class QueueNames
+        {
+            public static final String UserSignupQueue = "userSignupHandlerQueue";
+        }
+
+        public static final String ExchangeName = "guluguluExchange";
+
+        public static class RoutingKeys
+        {
+            public static final String UserSignupRoute = "userSignupHandlerRoute";
+        }
+    }
 }

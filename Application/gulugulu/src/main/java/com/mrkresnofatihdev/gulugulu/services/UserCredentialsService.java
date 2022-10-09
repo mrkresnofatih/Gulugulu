@@ -85,6 +85,7 @@ public class UserCredentialsService implements IUserCredentialsService {
             logger.error("DynamoDB error at GetUserCredentials");
             throw e;
         } catch (RecordNotFoundException e) {
+            logger.info("RecordNotFound error at GetUserCredentials");
             throw new RuntimeException(e);
         }
     }
@@ -111,11 +112,11 @@ public class UserCredentialsService implements IUserCredentialsService {
             return new UserCredentialsGetResponseModel(foundUserCredentials);
         }
         catch (DynamoDbException e) {
-            logger.info("DynamoDB error at UpdateUserProfile");
+            logger.info("DynamoDB error at UpdateUserCredentials");
             throw e;
         }
         catch (RecordNotFoundException e) {
-            logger.info("RecordNotFound error at UpdateUserProfile");
+            logger.info("RecordNotFound error at UpdateUserCredentials");
             throw new RuntimeException(e);
         }
     }

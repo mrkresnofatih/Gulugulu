@@ -3,22 +3,20 @@ package com.mrkresnofatihdev.gulugulu.models;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class UserProfileGetResponseModel implements IJsonSerializable {
+public class AuthUserSignupRequestModel implements IJsonSerializable {
     private String username;
     private String fullname;
-    private String avatar;
-    private String bio;
     private String email;
+    private String password;
 
-    public UserProfileGetResponseModel() {
+    public AuthUserSignupRequestModel() {
     }
 
-    public UserProfileGetResponseModel(UserProfileEntity userProfileEntity) {
-        this.username = userProfileEntity.getUsername();
-        this.fullname = userProfileEntity.getFullname();
-        this.avatar = userProfileEntity.getAvatar();
-        this.bio = userProfileEntity.getBio();
-        this.email = userProfileEntity.getEmail();
+    public AuthUserSignupRequestModel(String username, String fullname, String email, String password) {
+        this.username = username;
+        this.fullname = fullname;
+        this.email = email;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -37,28 +35,20 @@ public class UserProfileGetResponseModel implements IJsonSerializable {
         this.fullname = fullname;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

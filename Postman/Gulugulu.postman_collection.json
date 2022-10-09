@@ -10,16 +10,23 @@
 			"name": "UserProfile",
 			"item": [
 				{
-					"name": "GetUserProfile",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "UpdateUserProfile",
 					"request": {
-						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjUyOTc0MDgsImlkZW50aXR5TmFtZSI6InRyYWV5b3VuZyIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9._zgbXl9jlL2VugLCJNUUCExypJvBal2GGdszuB-1rZE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"fullname\": \"Trae Young\",\r\n    \"avatar\": \"https://i.imgur.com/hlMIFj7.jpg\",\r\n    \"bio\": \"Ice cold trae!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -27,7 +34,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/user-profile/get/kevindurant",
+							"raw": "http://localhost:8080/api/v1/user-profile/update",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -37,21 +44,30 @@
 								"api",
 								"v1",
 								"user-profile",
-								"get",
-								"kevindurant"
+								"update"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "CreateUserProfile",
+					"name": "GetUserProfile",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjUyOTc0MDgsImlkZW50aXR5TmFtZSI6InRyYWV5b3VuZyIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9._zgbXl9jlL2VugLCJNUUCExypJvBal2GGdszuB-1rZE",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"fullname\": \"LeBron James\",\r\n    \"email\": \"lebronjames@lalakers.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"traeyoung\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -59,7 +75,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/user-profile/create",
+							"raw": "http://localhost:8080/api/v1/user-profile/get",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -69,7 +85,120 @@
 								"api",
 								"v1",
 								"user-profile",
-								"create"
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserCredentials",
+			"item": [
+				{
+					"name": "UpdateUserCredentials",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjUyOTc2ODgsImlkZW50aXR5TmFtZSI6InRyYWV5b3VuZyIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9.n0M0TFEb3MNWNV5d23k6s3wIZCtKTQ_aLEJw4CHlIqY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"password\": \"Pwd1234567#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user-credentials/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user-credentials",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "UserLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"password\": \"Pwd1234567#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/user-login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserSignup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"fullname\": \"LeBron James\",\r\n    \"password\": \"Pwd1234#\",\r\n    \"email\": \"lebronjames@lalakers.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/user-signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user-signup"
 							]
 						}
 					},
