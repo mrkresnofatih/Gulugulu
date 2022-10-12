@@ -1,6 +1,7 @@
 package com.mrkresnofatihdev.gulugulu.services;
 
 import com.mrkresnofatihdev.gulugulu.models.*;
+import com.mrkresnofatihdev.gulugulu.utilities.Constants;
 import com.mrkresnofatihdev.gulugulu.utilities.HashHelper;
 import com.mrkresnofatihdev.gulugulu.utilities.JwtHelper;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -15,15 +17,17 @@ public class AuthService implements IAuthService {
     private final IUserCredentialsService userCredentialsService;
     private final IUserProfileService userProfileService;
     private final IIdentityProfileService identityProfileService;
+    private final IIdentityPermissionService identityPermissionService;
     private final JwtHelper jwtHelper;
     private final HashHelper hashHelper;
     private final Logger logger;
 
     @Autowired
-    public AuthService(IUserCredentialsService userCredentialsService, IUserProfileService userProfileService, IIdentityProfileService identityProfileService, JwtHelper jwtHelper, HashHelper hashHelper) {
+    public AuthService(IUserCredentialsService userCredentialsService, IUserProfileService userProfileService, IIdentityProfileService identityProfileService, IIdentityPermissionService identityPermissionService, JwtHelper jwtHelper, HashHelper hashHelper) {
         this.userCredentialsService = userCredentialsService;
         this.userProfileService = userProfileService;
         this.identityProfileService = identityProfileService;
+        this.identityPermissionService = identityPermissionService;
         this.jwtHelper = jwtHelper;
         this.hashHelper = hashHelper;
         this.logger = LoggerFactory.getLogger(AuthService.class);
@@ -92,5 +96,77 @@ public class AuthService implements IAuthService {
             logger.error("Failed when saving identity profile!");
             throw e;
         }
+
+        logger.info("Starting initialize basic permissions for new user");
+        try {
+            logger.info("Create GetProfile Permission!");
+            var username = authUserSignupReq
+                    .getUsername();
+            var permissionName = Constants.PermissionNames.UserProfile_GetProfile;
+            var userProfilePermissionCreateReq = new IdentityPermissionCreateRequestModel();
+            userProfilePermissionCreateReq.setPermissionName(permissionName);
+            var identityName = identityProfileService
+                    .GetIdentityNameOfUser(username);
+            userProfilePermissionCreateReq.setIdentityName(identityName);
+            List<String> resourceNames = List.of(
+                    String.format(Constants.PermissionNames.ResourceNameFormats.UserProfile, "*")
+            );
+            userProfilePermissionCreateReq.setResourceNames(resourceNames);
+            var createResponse = identityPermissionService
+                    .CreatePermission(userProfilePermissionCreateReq);
+            logger.info(String.format("Create Permission Done w/ response: %s", createResponse.toJsonSerialized()));
+        }
+        catch (Exception e) {
+            logger.error("Failed when saving permission GetProfile");
+            throw e;
+        }
+
+        try {
+            logger.info("Create UpdateProfile Permission!");
+            var username = authUserSignupReq
+                    .getUsername();
+            var permissionName = Constants.PermissionNames.UserProfile_UpdateProfile;
+            var userProfilePermissionCreateReq = new IdentityPermissionCreateRequestModel();
+            userProfilePermissionCreateReq.setPermissionName(permissionName);
+            var identityName = identityProfileService
+                    .GetIdentityNameOfUser(username);
+            userProfilePermissionCreateReq.setIdentityName(identityName);
+            List<String> resourceNames = List.of(
+                    String.format(Constants.PermissionNames.ResourceNameFormats.UserProfile, identityName)
+            );
+            userProfilePermissionCreateReq.setResourceNames(resourceNames);
+            var createResponse = identityPermissionService
+                    .CreatePermission(userProfilePermissionCreateReq);
+            logger.info(String.format("Create Permission Done w/ response: %s", createResponse.toJsonSerialized()));
+        }
+        catch (Exception e) {
+            logger.error("Failed when saving permission UpdateProfile");
+            throw e;
+        }
+
+        try {
+            logger.info("Create UpdateCredentials Permission!");
+            var username = authUserSignupReq
+                    .getUsername();
+            var permissionName = Constants.PermissionNames.UserCredentials_UpdateCredentials;
+            var userProfilePermissionCreateReq = new IdentityPermissionCreateRequestModel();
+            userProfilePermissionCreateReq.setPermissionName(permissionName);
+            var identityName = identityProfileService
+                    .GetIdentityNameOfUser(username);
+            userProfilePermissionCreateReq.setIdentityName(identityName);
+            List<String> resourceNames = List.of(
+                    String.format(Constants.PermissionNames.ResourceNameFormats.UserCredentials, identityName)
+            );
+            userProfilePermissionCreateReq.setResourceNames(resourceNames);
+            var createResponse = identityPermissionService
+                    .CreatePermission(userProfilePermissionCreateReq);
+            logger.info(String.format("Create Permission Done w/ response: %s", createResponse.toJsonSerialized()));
+        }
+        catch (Exception e) {
+            logger.error("Failed when saving permission UpdateCredentials");
+            throw e;
+        }
+
+        logger.info("Finishing method: UserSignup");
     }
 }

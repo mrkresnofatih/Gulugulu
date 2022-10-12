@@ -6,4 +6,5 @@ import com.mrkresnofatihdev.gulugulu.models.IdentityUserProfileCreateRequestMode
 public interface IIdentityProfileService {
     IdentityProfileGetResponseModel CreateForUser(IdentityUserProfileCreateRequestModel identityUserProfileCreateRequest);
     IdentityProfileGetResponseModel GetForUser(IdentityUserProfileCreateRequestModel identityUserProfileCreateRequest);
+    String GetIdentityNameOfUser(String username);
 }

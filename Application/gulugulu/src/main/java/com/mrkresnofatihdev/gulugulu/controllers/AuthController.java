@@ -5,6 +5,7 @@ import com.mrkresnofatihdev.gulugulu.models.AuthUserLoginResponseModel;
 import com.mrkresnofatihdev.gulugulu.models.AuthUserSignupRequestModel;
 import com.mrkresnofatihdev.gulugulu.models.ResponseModel;
 import com.mrkresnofatihdev.gulugulu.services.IAuthService;
+import com.mrkresnofatihdev.gulugulu.utilities.Constants;
 import com.mrkresnofatihdev.gulugulu.utilities.ResponseHelper;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -42,7 +43,7 @@ public class AuthController {
 
     @PostMapping("/user-signup")
     public ResponseEntity<ResponseModel<String>> UserSignup(@Valid @RequestBody AuthUserSignupRequestModel authUserSignupRequestModel) {
-        rabbitTemplate.convertAndSend(guluguluExchange.getName(), "userSignupHandlerRoute", authUserSignupRequestModel);
+        rabbitTemplate.convertAndSend(guluguluExchange.getName(), Constants.Rabbit.RoutingKeys.UserSignupRoute, authUserSignupRequestModel);
         return ResponseHelper.BuildOkResponse("User Signup Initialized!");
     }
 }

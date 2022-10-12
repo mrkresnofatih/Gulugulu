@@ -1,6 +1,7 @@
 package com.mrkresnofatihdev.gulugulu.utilities;
 
 import java.util.List;
+import java.util.Map;
 
 public class Constants {
     public static final String DynamoDbTableName = "GuluguluTb";
@@ -15,6 +16,30 @@ public class Constants {
                     "/api/v1/user-credentials"
             );
 
+    public static final Map<String, String> PermissionProtectedURIPrefixes = Map.of(
+            "/api/v1/user-profile/get", PermissionNames.UserProfile_GetProfile,
+            "/api/v1/user-profile/update", PermissionNames.UserProfile_UpdateProfile,
+            "/api/v1/user-credentials/update", PermissionNames.UserCredentials_UpdateCredentials
+    );
+
+    public static final Map<String, String> URIPrefixResourceNamePrefixMap = Map.of(
+            "/api/v1/user-profile", PermissionNames.ResourceNameFormats.UserProfile,
+            "/api/v1/user-credentials", PermissionNames.ResourceNameFormats.UserCredentials
+    );
+
+    public static class PermissionNames
+    {
+        public static final String UserProfile_GetProfile = "UserProfile.GetProfile";
+        public static final String UserProfile_UpdateProfile = "UserProfile.UpdateProfile";
+        public static final String UserCredentials_UpdateCredentials = "UserCredentials.UpdateCredentials";
+
+        public static class ResourceNameFormats
+        {
+            public static final String UserProfile = "UserProfile#%s";
+            public static final String UserCredentials = "UserCredentials#%s";
+        }
+    }
+
     public static class Jwt {
         public static class Claim
         {
@@ -24,6 +49,14 @@ public class Constants {
         }
 
         public static final String JwtTknIssuer = "Gulugulu.com";
+    }
+
+    public static class Http
+    {
+        public static class Headers
+        {
+            public static final String ResourceName = "ResourceName";
+        }
     }
 
     public static class Rabbit

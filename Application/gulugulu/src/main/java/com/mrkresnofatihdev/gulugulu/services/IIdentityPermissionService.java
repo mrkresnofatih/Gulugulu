@@ -1,0 +1,13 @@
+package com.mrkresnofatihdev.gulugulu.services;
+
+import com.mrkresnofatihdev.gulugulu.models.IdentityPermissionCreateRequestModel;
+import com.mrkresnofatihdev.gulugulu.models.IdentityPermissionGetRequestModel;
+import com.mrkresnofatihdev.gulugulu.models.IdentityPermissionGetResponseModel;
+
+public interface IIdentityPermissionService {
+    IdentityPermissionGetResponseModel GetPermission(IdentityPermissionGetRequestModel identityPermissionGetRequest);
+
+    IdentityPermissionGetResponseModel CreatePermission(IdentityPermissionCreateRequestModel identityPermissionCreateRequest);
+
+    IdentityPermissionGetResponseModel UpdatePermission(IdentityPermissionCreateRequestModel identityPermissionUpdateRequest);
+}

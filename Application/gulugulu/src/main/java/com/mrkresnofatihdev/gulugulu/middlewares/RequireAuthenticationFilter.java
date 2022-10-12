@@ -34,13 +34,13 @@ public class RequireAuthenticationFilter implements Filter {
             ServletRequest servletRequest,
             ServletResponse servletResponse,
             FilterChain filterChain) throws IOException, ServletException {
-        logger.info("Starting Method: doFilter!");
+        logger.info("Starting Method: RequireAuthenticationFilter.doFilter!");
         var httpRequest = (HttpServletRequest) servletRequest;
         var uri = httpRequest.getRequestURI();
         if (!_MustGoThruAuthentication(uri)) {
             logger.info("No authentication needed, auth successful!");
             filterChain.doFilter(servletRequest, servletResponse);
-            logger.info("Finishing Method: doFilter!");
+            logger.info("Finishing Method: RequireAuthenticationFilter.doFilter!");
             return;
         }
 
@@ -53,7 +53,7 @@ public class RequireAuthenticationFilter implements Filter {
                 var tokenValidityResponse = jwtHelper.VerifyToken(token);
                 if (Objects.isNull(tokenValidityResponse.getErrorMessage())) {
                     filterChain.doFilter(servletRequest, servletResponse);
-                    logger.info("Finishing Method: doFilter!");
+                    logger.info("Finishing Method: RequireAuthenticationFilter.doFilter!");
                     return;
                 }
                 logger.warn("Token is invalid or unhandled exception in JWT verification!");

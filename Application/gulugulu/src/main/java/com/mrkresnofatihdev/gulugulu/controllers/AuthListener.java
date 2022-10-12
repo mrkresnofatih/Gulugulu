@@ -2,6 +2,7 @@ package com.mrkresnofatihdev.gulugulu.controllers;
 
 import com.mrkresnofatihdev.gulugulu.models.AuthUserSignupRequestModel;
 import com.mrkresnofatihdev.gulugulu.services.IAuthService;
+import com.mrkresnofatihdev.gulugulu.utilities.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -19,7 +20,7 @@ public class AuthListener {
         this.logger = LoggerFactory.getLogger(AuthListener.class);
     }
 
-    @RabbitListener(queues = "userSignupHandlerQueue")
+    @RabbitListener(queues = Constants.Rabbit.QueueNames.UserSignupQueue)
     private void handleUserSignup(AuthUserSignupRequestModel userSignupRequest) {
         logger.info(String.format("Starting method: handleUserSignup w/ params: %s", userSignupRequest.toJsonSerialized()));
         authService.UserSignup(userSignupRequest);

@@ -40,10 +40,10 @@ public class IdentityProfileService implements IIdentityProfileService {
     }
 
     private String _GetIdentityUserProfilePartitionAndSortKey(String username) {
-        return _GetIdentityProfilePartitionAndSortKey(_GetIdentityUserProfileName(username));
+        return _GetIdentityProfilePartitionAndSortKey(GetIdentityNameOfUser(username));
     }
 
-    private String _GetIdentityUserProfileName(String username) {
+    public String GetIdentityNameOfUser(String username) {
         return String.format("user#%s", username);
     }
 
