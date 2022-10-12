@@ -36,13 +36,15 @@ public class AuthController {
     }
 
     @PostMapping("/user-login")
-    public ResponseEntity<ResponseModel<AuthUserLoginResponseModel>> UserLogin(@Valid @RequestBody AuthUserLoginRequestModel loginReq) {
+    public ResponseEntity<ResponseModel<AuthUserLoginResponseModel>> UserLogin(
+            @Valid @RequestBody AuthUserLoginRequestModel loginReq) {
         var loginResponse = authService.UserLogin(loginReq);
         return ResponseHelper.BuildOkResponse(loginResponse);
     }
 
     @PostMapping("/user-signup")
-    public ResponseEntity<ResponseModel<String>> UserSignup(@Valid @RequestBody AuthUserSignupRequestModel authUserSignupRequestModel) {
+    public ResponseEntity<ResponseModel<String>> UserSignup(
+            @Valid @RequestBody AuthUserSignupRequestModel authUserSignupRequestModel) {
         rabbitTemplate.convertAndSend(guluguluExchange.getName(), Constants.Rabbit.RoutingKeys.UserSignupRoute, authUserSignupRequestModel);
         return ResponseHelper.BuildOkResponse("User Signup Initialized!");
     }

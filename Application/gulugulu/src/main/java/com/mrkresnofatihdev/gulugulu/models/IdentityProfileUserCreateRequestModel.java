@@ -3,13 +3,13 @@ package com.mrkresnofatihdev.gulugulu.models;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class IdentityUserProfileCreateRequestModel implements IJsonSerializable {
+public class IdentityProfileUserCreateRequestModel implements IJsonSerializable {
     private String username;
 
-    public IdentityUserProfileCreateRequestModel() {
+    public IdentityProfileUserCreateRequestModel() {
     }
 
-    public IdentityUserProfileCreateRequestModel(String username) {
+    public IdentityProfileUserCreateRequestModel(String username) {
         this.username = username;
     }
 

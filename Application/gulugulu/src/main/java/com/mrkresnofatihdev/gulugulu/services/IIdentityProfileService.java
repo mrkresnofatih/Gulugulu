@@ -1,10 +1,10 @@
 package com.mrkresnofatihdev.gulugulu.services;
 
 import com.mrkresnofatihdev.gulugulu.models.IdentityProfileGetResponseModel;
-import com.mrkresnofatihdev.gulugulu.models.IdentityUserProfileCreateRequestModel;
+import com.mrkresnofatihdev.gulugulu.models.IdentityProfileUserCreateRequestModel;
 
 public interface IIdentityProfileService {
-    IdentityProfileGetResponseModel CreateForUser(IdentityUserProfileCreateRequestModel identityUserProfileCreateRequest);
-    IdentityProfileGetResponseModel GetForUser(IdentityUserProfileCreateRequestModel identityUserProfileCreateRequest);
+    IdentityProfileGetResponseModel CreateForUser(IdentityProfileUserCreateRequestModel identityUserProfileCreateRequest);
+    IdentityProfileGetResponseModel GetForUser(IdentityProfileUserCreateRequestModel identityUserProfileCreateRequest);
     String GetIdentityNameOfUser(String username);
 }

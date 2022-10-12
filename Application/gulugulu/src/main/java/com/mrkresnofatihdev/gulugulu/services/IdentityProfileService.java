@@ -3,7 +3,7 @@ package com.mrkresnofatihdev.gulugulu.services;
 import com.mrkresnofatihdev.gulugulu.exceptions.RecordNotFoundException;
 import com.mrkresnofatihdev.gulugulu.models.IdentityProfileEntity;
 import com.mrkresnofatihdev.gulugulu.models.IdentityProfileGetResponseModel;
-import com.mrkresnofatihdev.gulugulu.models.IdentityUserProfileCreateRequestModel;
+import com.mrkresnofatihdev.gulugulu.models.IdentityProfileUserCreateRequestModel;
 import com.mrkresnofatihdev.gulugulu.utilities.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class IdentityProfileService implements IIdentityProfileService {
     }
 
     @Override
-    public IdentityProfileGetResponseModel CreateForUser(IdentityUserProfileCreateRequestModel identityUserProfileCreateRequest) {
+    public IdentityProfileGetResponseModel CreateForUser(IdentityProfileUserCreateRequestModel identityUserProfileCreateRequest) {
         logger.info(String.format("Starting Method: CreateForUser w/ params: %s", identityUserProfileCreateRequest.toJsonSerialized()));
         try {
             var enhancedClient = _GetDynamoDbEnhancedClient();
@@ -71,7 +71,7 @@ public class IdentityProfileService implements IIdentityProfileService {
     }
 
     @Override
-    public IdentityProfileGetResponseModel GetForUser(IdentityUserProfileCreateRequestModel identityUserProfileCreateRequest) {
+    public IdentityProfileGetResponseModel GetForUser(IdentityProfileUserCreateRequestModel identityUserProfileCreateRequest) {
         logger.info(String.format("Starting Method: GetForUser w/ params: %s", identityUserProfileCreateRequest.toJsonSerialized()));
         try {
             var enhancedClient = _GetDynamoDbEnhancedClient();

@@ -42,7 +42,7 @@ public class AuthService implements IAuthService {
         if (isPasswordValid) {
             logger.info("Password is valid!");
             var identityUserProfile = identityProfileService
-                    .GetForUser(new IdentityUserProfileCreateRequestModel(userLoginReq.getUsername()));
+                    .GetForUser(new IdentityProfileUserCreateRequestModel(userLoginReq.getUsername()));
             var getTokenResponse = jwtHelper.GetToken(identityUserProfile.getIdentityName());
             if (!Objects.isNull(getTokenResponse.getErrorMessage())) {
                 logger.error("Get token response error message is not null");
@@ -88,7 +88,7 @@ public class AuthService implements IAuthService {
 
         logger.info("Starting saving identity profile to db");
         try {
-            var identityProfileCreateReq = new IdentityUserProfileCreateRequestModel(authUserSignupReq.getUsername());
+            var identityProfileCreateReq = new IdentityProfileUserCreateRequestModel(authUserSignupReq.getUsername());
             var identityProfileCreateResponse = identityProfileService.CreateForUser(identityProfileCreateReq);
             logger.info(String.format("Completed saving identity profile w/ response: %s", identityProfileCreateResponse.toJsonSerialized()));
         }
