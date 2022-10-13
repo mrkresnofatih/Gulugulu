@@ -55,6 +55,7 @@ public class RequirePermissionFilter implements Filter {
         var authHeader = httpRequest.getHeader(HttpHeaders.AUTHORIZATION);
         var resourceName = httpRequest.getHeader(Constants.Http.Headers.ResourceName);
         var authHeaderIsNullOrEmptyOrShort = Objects.isNull(authHeader) || !authHeader.startsWith("Bearer ");
+        if (Objects.isNull(resourceName)) logger.error("ResourceName is null!");
         if (!authHeaderIsNullOrEmptyOrShort && !Objects.isNull(resourceName)) {
             var token = authHeader.substring(7);
             var tokenIsNullOrEmpty = token.trim().equals("");

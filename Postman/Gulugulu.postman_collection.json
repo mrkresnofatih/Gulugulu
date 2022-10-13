@@ -116,16 +116,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjUzNTk1MDEsImlkZW50aXR5TmFtZSI6InVzZXIja29iZWJyeWFudCIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9.n4exfeJaOV3LZk87_SFWZ7DtZn6hAVIuYrRwLjgt-Q8",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU2NjQ3MjIsImlkZW50aXR5TmFtZSI6InVzZXIjbGVicm9uamFtZXMiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.GvPtrv4eJlvMF7Kdeq1vq4isPufVVw54Q7zBlDGDdzU",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "ResourceName",
+								"value": "UserCredentials#user#lebronjames",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"kobebryant\",\r\n    \"password\": \"Pwd123#\"\r\n}",
+							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"password\": \"Pwd12345#\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -161,7 +167,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"password\": \"Pwd123#\"\r\n}",
+							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"password\": \"Pwd12345#\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
