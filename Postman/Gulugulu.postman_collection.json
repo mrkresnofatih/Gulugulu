@@ -198,7 +198,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"fullname\": \"Kevin Durant\",\r\n    \"password\": \"Pwd123#\",\r\n    \"email\": \"kd@bknnets.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"fullname\": \"Trae Young\",\r\n    \"password\": \"Pwd123#\",\r\n    \"email\": \"icetrae@atlhawks.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,6 +217,134 @@
 								"v1",
 								"auth",
 								"user-signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Friend",
+			"item": [
+				{
+					"name": "SendFriendRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4MTE4OTQsImlkZW50aXR5TmFtZSI6InVzZXIjbGVicm9uamFtZXMiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.VnFO0xlyK3J5T906v9mvR1Xo5Lv_QsU1Qhtrn3WBOuc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"requesterUsername\": \"lebronjames\",\r\n    \"targetUsername\": \"traeyoung\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/send-friend-request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"send-friend-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPendingRequests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4MTU2MTEsImlkZW50aXR5TmFtZSI6InVzZXIjbGVicm9uamFtZXMiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.ohI1cRkoL8Ei7_GgcUvp4W9g0ATHRHgye8mwlJuuY-c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/get-pending-requests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"get-pending-requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMyFriendRequests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4MTgwNTksImlkZW50aXR5TmFtZSI6InVzZXIjbGVicm9uamFtZXMiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.ULzmA-aeFMHdtXVBQeD1ZHXyUcOXrsnxJN5cL25Q7I4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/get-my-friend-requests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"get-my-friend-requests"
 							]
 						}
 					},

@@ -20,6 +20,11 @@ public class RabbitConfig {
     }
 
     @Bean
+    Queue sendFriendRequestHandlerQueue() {
+        return new Queue(Constants.Rabbit.QueueNames.SendFriendRequestQueue, false, false, false);
+    }
+
+    @Bean
     DirectExchange guluguluExchange() {
         return new DirectExchange(Constants.Rabbit.ExchangeName);
     }
@@ -29,6 +34,13 @@ public class RabbitConfig {
         return BindingBuilder.bind(userSignupHandlerQueue)
                 .to(guluguluExchange)
                 .with(Constants.Rabbit.RoutingKeys.UserSignupRoute);
+    }
+
+    @Bean
+    Binding sendFriendRequestHandlerBinding(Queue sendFriendRequestHandlerQueue, DirectExchange guluguluExchange) {
+        return BindingBuilder.bind(sendFriendRequestHandlerQueue)
+                .to(guluguluExchange)
+                .with(Constants.Rabbit.RoutingKeys.SendFriendRequestRoute);
     }
 
     @Bean

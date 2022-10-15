@@ -13,7 +13,8 @@ public class Constants {
     public static final List<String> AuthProtectedURIPrefixes = List
             .of(
                     "/api/v1/user-profile",
-                    "/api/v1/user-credentials"
+                    "/api/v1/user-credentials",
+                    "/api/v1/friend"
             );
 
     public static final Map<String, String> PermissionProtectedURIPrefixes = Map.of(
@@ -64,6 +65,7 @@ public class Constants {
         public static class QueueNames
         {
             public static final String UserSignupQueue = "userSignupHandlerQueue";
+            public static final String SendFriendRequestQueue = "sendFriendRequestHandlerQueue";
         }
 
         public static final String ExchangeName = "guluguluExchange";
@@ -71,6 +73,7 @@ public class Constants {
         public static class RoutingKeys
         {
             public static final String UserSignupRoute = "userSignupHandlerRoute";
+            public static final String SendFriendRequestRoute = "sendFriendRequestHandlerRoute";
         }
     }
 }
