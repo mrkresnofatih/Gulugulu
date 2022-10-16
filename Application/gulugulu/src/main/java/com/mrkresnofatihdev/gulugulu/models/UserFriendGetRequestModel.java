@@ -3,16 +3,18 @@ package com.mrkresnofatihdev.gulugulu.models;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class UserPendingFriendDeleteRequestModel implements IJsonSerializable {
+public class UserFriendGetRequestModel implements IJsonSerializable {
     private String username;
-    private String createdAt;
+    private String friendUsername;
 
-    public UserPendingFriendDeleteRequestModel() {
+    public UserFriendGetRequestModel() {
     }
 
-    public UserPendingFriendDeleteRequestModel(String username, String createdAt) {
+    public UserFriendGetRequestModel(
+            String username,
+            String friendUsername) {
         this.username = username;
-        this.createdAt = createdAt;
+        this.friendUsername = friendUsername;
     }
 
     public String getUsername() {
@@ -23,12 +25,12 @@ public class UserPendingFriendDeleteRequestModel implements IJsonSerializable {
         this.username = username;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getFriendUsername() {
+        return friendUsername;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setFriendUsername(String friendUsername) {
+        this.friendUsername = friendUsername;
     }
 
     @Override

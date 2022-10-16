@@ -1,9 +1,6 @@
 package com.mrkresnofatihdev.gulugulu.controllers;
 
-import com.mrkresnofatihdev.gulugulu.models.FriendGetFriendRequestListRequestModel;
-import com.mrkresnofatihdev.gulugulu.models.FriendGetFriendRequestResponseModel;
-import com.mrkresnofatihdev.gulugulu.models.FriendSendFriendRequestModel;
-import com.mrkresnofatihdev.gulugulu.models.ResponseModel;
+import com.mrkresnofatihdev.gulugulu.models.*;
 import com.mrkresnofatihdev.gulugulu.services.IFriendService;
 import com.mrkresnofatihdev.gulugulu.utilities.Constants;
 import com.mrkresnofatihdev.gulugulu.utilities.ResponseHelper;
@@ -56,5 +53,26 @@ public class FriendController {
         var listOfMyFriendRequests = friendService
                 .GetReceivedFriendRequests(friendGetFriendRequestListRequest);
         return ResponseHelper.BuildOkResponse(listOfMyFriendRequests);
+    }
+
+    @PostMapping("/approve-friend-request")
+    public ResponseEntity<ResponseModel<String>> ApproveMyFriendRequest(
+            @Valid @RequestBody FriendRespondFriendRequestModel approveFriendRequestModel) {
+        friendService.ApproveReceivedFriendRequest(approveFriendRequestModel);
+        return ResponseHelper.BuildOkResponse("Approved!");
+    }
+
+    @PostMapping("/reject-friend-request")
+    public ResponseEntity<ResponseModel<String>> RejectMyFriendRequest(
+            @Valid @RequestBody FriendRespondFriendRequestModel approveFriendRequestModel) {
+        friendService.RejectReceivedFriendRequest(approveFriendRequestModel);
+        return ResponseHelper.BuildOkResponse("Rejected!");
+    }
+
+    @PostMapping("/get-friends")
+    public ResponseEntity<ResponseModel<List<UserProfileGetResponseModel>>> GetFriends(
+            @Valid @RequestBody UserFriendListRequestModel userFriendListRequest) {
+        var userFriendList = friendService.GetFriendsList(userFriendListRequest);
+        return ResponseHelper.BuildOkResponse(userFriendList);
     }
 }

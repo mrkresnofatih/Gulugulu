@@ -46,7 +46,7 @@ public class UserFriendRequestService implements IUserFriendRequestService {
     }
 
     @Override
-    public void DeleteFriendRequest(UserFriendRequestDeleteRequestModel userFriendRequestDeleteRequest) {
+    public void DeleteFriendRequest(UserFriendRequestGetRequestModel userFriendRequestDeleteRequest) {
         logger.info(String.format("Start method: deleteUserFriendRequest w/ param: %s", userFriendRequestDeleteRequest.toJsonSerialized()));
         try {
             var enhancedClient = _GetDynamoDbEnhancedClient();
@@ -132,6 +132,37 @@ public class UserFriendRequestService implements IUserFriendRequestService {
         catch (DynamoDbException e) {
             logger.error("Dynamodb error at GetFriendRequestList");
             throw e;
+        }
+    }
+
+    @Override
+    public UserFriendRequestGetResponseModel GetFriendRequest(UserFriendRequestGetRequestModel userFriendRequestGetRequestModel) {
+        logger.info(String.format("Start method: GetFriendRequest w/ params: %s", userFriendRequestGetRequestModel.toJsonSerialized()));
+        try {
+            var enhancedClient = _GetDynamoDbEnhancedClient();
+            DynamoDbTable<UserFriendRequestEntity> userFriendRequestTable = enhancedClient
+                    .table(Constants.DynamoDbTableName, TableSchema.fromBean(UserFriendRequestEntity.class));
+            var partitionKey = _GetUserFriendRequestPartitionKey(userFriendRequestGetRequestModel.getUsername());
+            var sortKey = _GetUserFriendRequestSortKey(userFriendRequestGetRequestModel.getCreatedAt());
+            var userFriendRequestKey = Key.builder()
+                    .partitionValue(partitionKey)
+                    .sortValue(sortKey)
+                    .build();
+            var foundFriendRequest = userFriendRequestTable.getItem(r -> r.key(userFriendRequestKey));
+            if (Objects.isNull(foundFriendRequest)) {
+                throw new RecordNotFoundException();
+            }
+            var returnUserPendingFriend = new UserFriendRequestGetResponseModel(foundFriendRequest);
+            logger.info("Finish method: GetFriendRequest");
+            return returnUserPendingFriend;
+        }
+        catch (DynamoDbException e) {
+            logger.error("Dynamodb error at GetFriendRequest");
+            throw e;
+        }
+        catch (RecordNotFoundException e) {
+            logger.error("Record not found error at GetFriendRequest");
+            throw new RuntimeException(e);
         }
     }
 }

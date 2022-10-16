@@ -16,4 +16,6 @@ public interface IFriendService {
     void ApproveReceivedFriendRequest(FriendRespondFriendRequestModel friendRespondFriendRequest);
 
     void RejectReceivedFriendRequest(FriendRespondFriendRequestModel friendRespondFriendRequest);
+
+    List<UserProfileGetResponseModel> GetFriendsList(UserFriendListRequestModel userFriendListRequest);
 }

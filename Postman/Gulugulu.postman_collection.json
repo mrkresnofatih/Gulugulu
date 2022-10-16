@@ -167,7 +167,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"password\": \"Pwd12345#\"\r\n}",
+							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"password\": \"Pwd123#\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -198,7 +198,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"fullname\": \"Trae Young\",\r\n    \"password\": \"Pwd123#\",\r\n    \"email\": \"icetrae@atlhawks.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"fullname\": \"Kevin Durant\",\r\n    \"password\": \"Pwd123#\",\r\n    \"email\": \"kd@bknnets.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -235,7 +235,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4MTE4OTQsImlkZW50aXR5TmFtZSI6InVzZXIjbGVicm9uamFtZXMiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.VnFO0xlyK3J5T906v9mvR1Xo5Lv_QsU1Qhtrn3WBOuc",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4OTc3MzQsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.Dq5oqVhcer2_y71NyzExg97-dPiQaccHE7cDMMj41wI",
 									"type": "string"
 								}
 							]
@@ -244,7 +244,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"requesterUsername\": \"lebronjames\",\r\n    \"targetUsername\": \"traeyoung\"\r\n}",
+							"raw": "{\r\n    \"requesterUsername\": \"kevindurant\",\r\n    \"targetUsername\": \"lebronjames\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -276,7 +276,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4MTU2MTEsImlkZW50aXR5TmFtZSI6InVzZXIjbGVicm9uamFtZXMiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.ohI1cRkoL8Ei7_GgcUvp4W9g0ATHRHgye8mwlJuuY-c",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4NDg1MzQsImlkZW50aXR5TmFtZSI6InVzZXIjdHJhZXlvdW5nIiwiand0VGtuSXNzdWVyIjoiR3VsdWd1bHUuY29tIn0.WNbQOWdDO6v3knk9rxx2yrvNWPxdmzmdUefFJZRskjM",
 									"type": "string"
 								}
 							]
@@ -285,7 +285,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
+							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -317,7 +317,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4MTgwNTksImlkZW50aXR5TmFtZSI6InVzZXIjbGVicm9uamFtZXMiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.ULzmA-aeFMHdtXVBQeD1ZHXyUcOXrsnxJN5cL25Q7I4",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4OTc3MzQsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.Dq5oqVhcer2_y71NyzExg97-dPiQaccHE7cDMMj41wI",
 									"type": "string"
 								}
 							]
@@ -326,7 +326,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
+							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -345,6 +345,129 @@
 								"v1",
 								"friend",
 								"get-my-friend-requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ApproveFriendRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4OTc3MzQsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.Dq5oqVhcer2_y71NyzExg97-dPiQaccHE7cDMMj41wI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"createdAt\": \"000858713841670\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/approve-friend-request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"approve-friend-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RejectFriendRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4OTIzOTUsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.wS9mzHEb2lXYWNS5JmhcvnHI5i9Nyr9pxyd5jbVvkGw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"createdAt\": \"000858718860254\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/reject-friend-request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"reject-friend-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFriends",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU4OTgxMjIsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.sjgm4O4JnEEhd356RHvn8sqheeErHVr97sICXmdUwgE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"startFriendUsername\": \"\",\r\n    \"pageSize\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/get-friends",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"get-friends"
 							]
 						}
 					},

@@ -46,7 +46,7 @@ public class UserPendingFriendService implements IUserPendingFriendService {
     }
 
     @Override
-    public void DeletePendingFriend(UserPendingFriendDeleteRequestModel userPendingFriendDeleteRequest) {
+    public void DeletePendingFriend(UserPendingFriendGetRequestModel userPendingFriendDeleteRequest) {
         logger.info(String.format("Start method: deleteUserPendingFriend w/ param: %s", userPendingFriendDeleteRequest.toJsonSerialized()));
         try {
             var enhancedClient = _GetDynamoDbEnhancedClient();
@@ -134,6 +134,36 @@ public class UserPendingFriendService implements IUserPendingFriendService {
         catch (DynamoDbException e) {
             logger.error("DynamoDB error at SavePendingFriend");
             throw e;
+        }
+    }
+
+    @Override
+    public UserPendingFriendGetResponseModel GetPendingFriend(UserPendingFriendGetRequestModel userPendingFriendGetRequest) {
+        logger.info(String.format("Start method: GetPendingFriend w/ param: %s", userPendingFriendGetRequest.toJsonSerialized()));
+        try {
+            var enhancedClient = _GetDynamoDbEnhancedClient();
+            DynamoDbTable<UserPendingFriendEntity> userPendingFriendTable = enhancedClient
+                    .table(Constants.DynamoDbTableName, TableSchema.fromBean(UserPendingFriendEntity.class));
+            var partitionKey = _GetUserPendingFriendPartitionKey(userPendingFriendGetRequest.getUsername());
+            var sortKey = _GetUserPendingFriendSortKey(userPendingFriendGetRequest.getCreatedAt());
+            var userPendingFriendKey = Key.builder()
+                    .partitionValue(partitionKey)
+                    .sortValue(sortKey)
+                    .build();
+            var foundPendingFriend = userPendingFriendTable.getItem(r -> r.key(userPendingFriendKey));
+            if (Objects.isNull(foundPendingFriend)) {
+                throw new RecordNotFoundException();
+            }
+            var returnUserPendingFriend = new UserPendingFriendGetResponseModel(foundPendingFriend);
+            logger.info("Finish method: GetUserPendingFriend");
+            return returnUserPendingFriend;
+        }
+        catch (DynamoDbException e) {
+            logger.error("DynamoDB error at GetUserPendingFriend");
+            throw e;
+        } catch (RecordNotFoundException e) {
+            logger.error("RecordNotFound error at GetUserPendingFriend");
+            throw new RuntimeException(e);
         }
     }
 }

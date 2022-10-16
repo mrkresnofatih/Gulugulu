@@ -37,7 +37,7 @@ public class FriendRequestReceivedNotificationCreateModel implements IUserNotifi
 
     @Override
     public String getMessage() {
-        return String.format("%s sent you a friend request!", requesterUsername);
+        return String.format("@%s sent you a friend request!", requesterUsername);
     }
 
     @Override
