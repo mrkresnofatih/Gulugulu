@@ -3,8 +3,22 @@ package com.mrkresnofatihdev.gulugulu.models;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class FriendCancelSendFriendRequestModel implements IJsonSerializable {
+    @NotNull(message = "Username must not be null")
+    @NotEmpty(message = "Username must not be empty")
+    @Size(min = 6, max = 30, message = "Username must be 6-30 chars")
+    @Pattern(regexp = "^[A-Za-z0-9_]*$", message = "Username must match set regex")
     private String username;
+
+    @NotEmpty(message = "createdAt must not be empty")
+    @NotNull(message = "createdAt must not be null")
+    @Size(min = 15, max = 15, message = "startCreatedAt must be 15 chars")
+    @Pattern(regexp = "[0-9]{15}", message = "startCreatedAt must mast [0-9]{15}")
     private String createdAt;
 
     public FriendCancelSendFriendRequestModel() {

@@ -54,6 +54,46 @@ public class FriendService implements IFriendService {
             throw e;
         }
 
+        try {
+            var foundUserFriend = userFriendService
+                    .GetUserFriend(
+                            new UserFriendGetRequestModel(
+                                    requesterProfile.getUsername(),
+                                    targetUserProfile.getUsername()
+                            ));
+            if (!Objects.isNull(foundUserFriend)) {
+                logger.warn("userFriend w/ provided friend username already exists, will terminate send-friend-request process");
+                return;
+            }
+        }
+        catch (Exception e) {
+            logger.info("UserFriend doesn't exist yet, will continue to send friend request");
+        }
+
+        var existingRequesterFriendRequest = _GetFriendRequestOfRequester(
+                targetUserProfile.getUsername(),
+                requesterProfile.getUsername()
+        );
+        if (!Objects.isNull(existingRequesterFriendRequest)) {
+            _RemoveFriendRequestsGetRequester(
+                    new FriendRespondFriendRequestModel(
+                            existingRequesterFriendRequest.getUsername(),
+                            existingRequesterFriendRequest.getCreatedAt()
+                    ));
+        }
+
+        var existingFriendRequest = _GetFriendRequestOfRequester(
+                requesterProfile.getUsername(),
+                targetUserProfile.getUsername()
+        );
+        if (!Objects.isNull(existingFriendRequest)) {
+            _RemoveFriendRequestsGetRequester(
+                    new FriendRespondFriendRequestModel(
+                            existingFriendRequest.getUsername(),
+                            existingFriendRequest.getCreatedAt()
+                    ));
+        }
+
         UserFriendRequestGetResponseModel createdFriendRequest;
         try {
             createdFriendRequest = userFriendRequestService
@@ -147,6 +187,10 @@ public class FriendService implements IFriendService {
             var friendReqMap = friendRequestList.stream()
                     .collect(Collectors.toMap(UserFriendRequestGetResponseModel::getRequesterUsername, s -> s));
             if (friendReqMap.keySet().size() < 20) {
+                if (friendReqMap.containsKey(requesterUsername)) {
+                    logger.info("Found user friend request");
+                    foundUserFriendRequest = friendReqMap.get(requesterUsername);
+                }
                 loopFinish = true;
             } else {
                 if (friendReqMap.containsKey(requesterUsername)) {
@@ -330,5 +374,38 @@ public class FriendService implements IFriendService {
         logger.info("finished method: ApproveReceivedFriendRequest");
 
         return requesterUsername;
+    }
+
+    private UserFriendRequestGetResponseModel _GetFriendRequestOfRequester(String requesterUsername, String friendUsername) {
+        var isFriendRequestFound = false;
+        var startCreatedAt = "000000000000000";
+        var loopFinish = false;
+        UserFriendRequestGetResponseModel foundUserFriendRequest = null;
+        while (!isFriendRequestFound && !loopFinish) {
+            var friendRequestList = userFriendRequestService
+                    .GetFriendRequestList(new UserFriendRequestListRequestModel(
+                            friendUsername,
+                            startCreatedAt,
+                            20
+                    ));
+            var friendReqMap = friendRequestList.stream()
+                    .collect(Collectors.toMap(UserFriendRequestGetResponseModel::getRequesterUsername, s -> s));
+            if (friendReqMap.keySet().size() < 20) {
+                if (friendReqMap.containsKey(requesterUsername)) {
+                    logger.info("Found user friend request");
+                    foundUserFriendRequest = friendReqMap.get(requesterUsername);
+                }
+                loopFinish = true;
+            } else {
+                if (friendReqMap.containsKey(requesterUsername)) {
+                    logger.info("Found user friend request");
+                    foundUserFriendRequest = friendReqMap.get(requesterUsername);
+                    loopFinish = true;
+                } else {
+                    startCreatedAt = friendRequestList.get(19).getCreatedAt();
+                }
+            }
+        }
+        return foundUserFriendRequest;
     }
 }

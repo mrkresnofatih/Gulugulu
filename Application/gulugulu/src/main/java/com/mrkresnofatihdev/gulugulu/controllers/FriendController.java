@@ -69,6 +69,13 @@ public class FriendController {
         return ResponseHelper.BuildOkResponse("Rejected!");
     }
 
+    @PostMapping("/cancel-friend-request")
+    public ResponseEntity<ResponseModel<String>> CancelSentFriendRequest(
+            @Valid @RequestBody FriendCancelSendFriendRequestModel friendCancelSendFriendRequest) {
+        friendService.CancelSendFriendRequest(friendCancelSendFriendRequest);
+        return ResponseHelper.BuildOkResponse("Cancelled!");
+    }
+
     @PostMapping("/get-friends")
     public ResponseEntity<ResponseModel<List<UserProfileGetResponseModel>>> GetFriends(
             @Valid @RequestBody UserFriendListRequestModel userFriendListRequest) {
