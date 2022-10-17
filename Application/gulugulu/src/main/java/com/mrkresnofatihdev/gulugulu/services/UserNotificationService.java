@@ -75,6 +75,7 @@ public class UserNotificationService implements IUserNotificationService {
                 userNotification.setImage(userNotificationFromTable.getImage());
                 userNotification.setLink(userNotificationFromTable.getLink());
                 userNotification.setCreatedAt(userNotificationFromTable.getCreatedAt());
+                userNotification.setAcknowledged(userNotificationFromTable.isAcknowledged());
 
                 userNotificationList.add(userNotification);
             }
@@ -82,6 +83,37 @@ public class UserNotificationService implements IUserNotificationService {
         }
         catch (DynamoDbException e) {
             logger.error("DynamoDB error at GetUserNotificationList");
+            throw e;
+        }
+    }
+
+    @Override
+    public void AcknowledgeUserNotificationList(UserNotificationListGetRequestModel userNotificationListGetRequest) {
+        logger.info(String.format("Start method: AcknowledgeUserNotificationList w/ param: %s", userNotificationListGetRequest.toJsonSerialized()));
+        try {
+            var enhancedClient = _GetDynamoDbEnhancedClient();
+            DynamoDbTable<UserNotificationEntity> userNotificationTable = enhancedClient
+                    .table(Constants.DynamoDbTableName, TableSchema.fromBean(UserNotificationEntity.class));
+            var queryStartKey = Key.builder()
+                    .partitionValue(_GetUserNotificationPartitionKey(userNotificationListGetRequest.getUsername()))
+                    .sortValue(_GetUserNotificationSortKey(userNotificationListGetRequest.getStartCreatedAt()))
+                    .build();
+            var queryRequest = QueryEnhancedRequest.builder()
+                    .limit(userNotificationListGetRequest.getPageSize())
+                    .queryConditional(QueryConditional.sortGreaterThanOrEqualTo(queryStartKey))
+                    .build();
+            for (UserNotificationEntity userNotificationFromTable : userNotificationTable
+                    .query(queryRequest)
+                    .items()) {
+                if (!userNotificationFromTable.isAcknowledged()) {
+                    userNotificationFromTable.setAcknowledged(true);
+                    userNotificationTable.updateItem(r -> r.item(userNotificationFromTable));
+                }
+            }
+            logger.info("Finish acknowledge notifications!");
+        }
+        catch (DynamoDbException e) {
+            logger.info("DynamoDB error at AcknowledgeUserNotificationList");
             throw e;
         }
     }

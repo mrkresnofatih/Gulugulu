@@ -9,6 +9,7 @@ public class UserNotificationGetResponseModel implements IJsonSerializable {
     private String message;
     private String image;
     private String link;
+    private boolean acknowledged;
 
     public UserNotificationGetResponseModel() {
     }
@@ -18,12 +19,14 @@ public class UserNotificationGetResponseModel implements IJsonSerializable {
             String createdAt,
             String message,
             String image,
-            String link) {
+            String link,
+            boolean acknowledged) {
         this.username = username;
         this.createdAt = createdAt;
         this.message = message;
         this.image = image;
         this.link = link;
+        this.acknowledged = acknowledged;
     }
 
     public UserNotificationGetResponseModel(UserNotificationEntity userNotificationEntity) {
@@ -32,6 +35,7 @@ public class UserNotificationGetResponseModel implements IJsonSerializable {
         this.image = userNotificationEntity.getImage();
         this.link = userNotificationEntity.getLink();
         this.createdAt = userNotificationEntity.getCreatedAt();
+        this.acknowledged = userNotificationEntity.isAcknowledged();
     }
 
     public String getUsername() {
@@ -72,6 +76,14 @@ public class UserNotificationGetResponseModel implements IJsonSerializable {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public boolean isAcknowledged() {
+        return acknowledged;
+    }
+
+    public void setAcknowledged(boolean acknowledged) {
+        this.acknowledged = acknowledged;
     }
 
     @Override

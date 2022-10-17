@@ -66,6 +66,7 @@ public class Constants {
         {
             public static final String UserSignupQueue = "userSignupHandlerQueue";
             public static final String SendFriendRequestQueue = "sendFriendRequestHandlerQueue";
+            public static final String AcknowledgeNotificationsQueue = "acknowledgeNotificationsHandlerQueue";
         }
 
         public static final String ExchangeName = "guluguluExchange";
@@ -74,6 +75,7 @@ public class Constants {
         {
             public static final String UserSignupRoute = "userSignupHandlerRoute";
             public static final String SendFriendRequestRoute = "sendFriendRequestHandlerRoute";
+            public static final String AcknowledgeNotificationsRoute = "acknowledgeNotificationsHandlerRoute";
         }
     }
 }

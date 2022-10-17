@@ -9,5 +9,7 @@ import java.util.List;
 public interface IUserNotificationService {
     List<UserNotificationGetResponseModel> GetUserNotificationList(UserNotificationListGetRequestModel userNotificationListGetRequest);
 
+    void AcknowledgeUserNotificationList(UserNotificationListGetRequestModel userNotificationListGetRequest);
+
     UserNotificationGetResponseModel CreateUserNotification(IUserNotificationCreatable userNotificationCreateRequest);
 }

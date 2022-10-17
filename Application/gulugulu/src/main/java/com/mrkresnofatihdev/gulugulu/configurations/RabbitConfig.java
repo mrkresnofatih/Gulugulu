@@ -25,6 +25,11 @@ public class RabbitConfig {
     }
 
     @Bean
+    Queue acknowledgeNotificationsHandlerQueue() {
+        return new Queue(Constants.Rabbit.QueueNames.AcknowledgeNotificationsQueue, false, false, false);
+    }
+
+    @Bean
     DirectExchange guluguluExchange() {
         return new DirectExchange(Constants.Rabbit.ExchangeName);
     }
@@ -41,6 +46,13 @@ public class RabbitConfig {
         return BindingBuilder.bind(sendFriendRequestHandlerQueue)
                 .to(guluguluExchange)
                 .with(Constants.Rabbit.RoutingKeys.SendFriendRequestRoute);
+    }
+
+    @Bean
+    Binding acknowledgeNotificationsHandlerBinding(Queue acknowledgeNotificationsHandlerQueue, DirectExchange guluguluExchange) {
+        return BindingBuilder.bind(acknowledgeNotificationsHandlerQueue)
+                .to(guluguluExchange)
+                .with(Constants.Rabbit.RoutingKeys.AcknowledgeNotificationsRoute);
     }
 
     @Bean

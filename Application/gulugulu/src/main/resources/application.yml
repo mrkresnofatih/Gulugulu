@@ -1,8 +1,8 @@
 cloud:
   aws:
     credentials:
-      access: access
-      secret: secret
+      access: AKIAT4FGO43SC427JJKR
+      secret: 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
       region: ap-southeast-3
 spring:
   application:

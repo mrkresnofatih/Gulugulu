@@ -198,7 +198,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"fullname\": \"Lebron James\",\r\n    \"password\": \"Pwd123#\",\r\n    \"email\": \"lebronjames@lalakers.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"fullname\": \"Trae Young\",\r\n    \"password\": \"Pwd123#\",\r\n    \"email\": \"icetrae@hawks.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -509,6 +509,52 @@
 								"v1",
 								"friend",
 								"get-friends"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "GetList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjU5Njg2NzAsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.H_iVljzFFJ-HHKYKe9thIt00MRD1q-TRaWn9oLS6hKI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/notification/get-list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"notification",
+								"get-list"
 							]
 						}
 					},

@@ -14,6 +14,7 @@ public class UserNotificationEntity {
     private String message;
     private String link;
     private String image;
+    private boolean acknowledged;
 
     public UserNotificationEntity() {
     }
@@ -25,7 +26,8 @@ public class UserNotificationEntity {
             String createdAt,
             String message,
             String link,
-            String image) {
+            String image,
+            boolean acknowledged) {
         this.partitionKey = partitionKey;
         this.sortKey = sortKey;
         this.username = username;
@@ -33,6 +35,7 @@ public class UserNotificationEntity {
         this.message = message;
         this.link = link;
         this.image = image;
+        this.acknowledged = acknowledged;
     }
 
     public UserNotificationEntity(Builder builder) {
@@ -43,6 +46,7 @@ public class UserNotificationEntity {
         this.image = builder.image;
         this.link = builder.link;
         this.createdAt = builder.createdAt;
+        this.acknowledged = builder.acknowledged;
     }
 
     @DynamoDbPartitionKey
@@ -103,6 +107,14 @@ public class UserNotificationEntity {
         this.image = image;
     }
 
+    public boolean isAcknowledged() {
+        return acknowledged;
+    }
+
+    public void setAcknowledged(boolean acknowledged) {
+        this.acknowledged = acknowledged;
+    }
+
     public static class Builder
     {
         private String partitionKey;
@@ -113,6 +125,7 @@ public class UserNotificationEntity {
         private String link;
 
         private String image;
+        private boolean acknowledged;
 
         public Builder() {
         }
@@ -120,6 +133,7 @@ public class UserNotificationEntity {
         public Builder setUsername(String username) {
             this.username = username;
             this.partitionKey = String.format("user-notifications#%s", username);
+            this.acknowledged = false;
             return this;
         }
 
