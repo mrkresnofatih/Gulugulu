@@ -40,7 +40,13 @@ public class NotificationController {
             @Valid @RequestBody UserNotificationListGetRequestModel userNotificationListGetRequest) {
         var notificationList = userNotificationService
                 .GetUserNotificationList(userNotificationListGetRequest);
-        rabbitTemplate.convertAndSend(guluguluExchange.getName(), Constants.Rabbit.RoutingKeys.AcknowledgeNotificationsRoute, userNotificationListGetRequest);
         return ResponseHelper.BuildOkResponse(notificationList);
+    }
+
+    @PostMapping("/ack-list")
+    public ResponseEntity<ResponseModel<String>> AcknowledgeNotifications(
+            @Valid @RequestBody UserNotificationListGetRequestModel userNotificationListGetRequest) {
+        rabbitTemplate.convertAndSend(guluguluExchange.getName(), Constants.Rabbit.RoutingKeys.AcknowledgeNotificationsRoute, userNotificationListGetRequest);
+        return ResponseHelper.BuildOkResponse("Acknowledged!");
     }
 }
