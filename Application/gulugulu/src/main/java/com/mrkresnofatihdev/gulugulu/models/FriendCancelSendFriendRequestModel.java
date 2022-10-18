@@ -8,25 +8,25 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class AuthUserLoginRequestModel implements IJsonSerializable {
+public class FriendCancelSendFriendRequestModel implements IJsonSerializable {
     @NotNull(message = "Username must not be null")
     @NotEmpty(message = "Username must not be empty")
     @Size(min = 6, max = 30, message = "Username must be 6-30 chars")
     @Pattern(regexp = "^[A-Za-z0-9_]*$", message = "Username must match set regex")
     private String username;
 
-    @NotNull(message = "Password must not be null")
-    @NotEmpty(message = "Password must not be empty")
-    @Size(min = 6, message = "Password must be at least 6 chars")
-    @Pattern(regexp = "^[A-Za-z0-9_!@./#&+]*$", message = "Password must match set regex")
-    private String password;
+    @NotEmpty(message = "createdAt must not be empty")
+    @NotNull(message = "createdAt must not be null")
+    @Size(min = 15, max = 15, message = "startCreatedAt must be 15 chars")
+    @Pattern(regexp = "[0-9]{15}", message = "startCreatedAt must mast [0-9]{15}")
+    private String createdAt;
 
-    public AuthUserLoginRequestModel() {
+    public FriendCancelSendFriendRequestModel() {
     }
 
-    public AuthUserLoginRequestModel(String username, String password) {
+    public FriendCancelSendFriendRequestModel(String username, String createdAt) {
         this.username = username;
-        this.password = password;
+        this.createdAt = createdAt;
     }
 
     public String getUsername() {
@@ -37,12 +37,12 @@ public class AuthUserLoginRequestModel implements IJsonSerializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override

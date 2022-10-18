@@ -167,7 +167,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"lebronjames\",\r\n    \"password\": \"Pwd12345#\"\r\n}",
+							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"password\": \"Pwd123#\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -198,7 +198,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"fullname\": \"Kevin Durant\",\r\n    \"password\": \"Pwd123#\",\r\n    \"email\": \"kd@bknnets.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"fullname\": \"Kevin Durant\",\r\n    \"password\": \"Pwd123#\",\r\n    \"email\": \"kd@nets.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,6 +217,433 @@
 								"v1",
 								"auth",
 								"user-signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Friend",
+			"item": [
+				{
+					"name": "SendFriendRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjYxMzcxNzMsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.ccDU-uBYetFvyvffa24vJpUDGjQ4f9RFKyXaWAWYxd4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "ResourceName",
+								"value": "UserPendingFriend#user#kevindurant",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"requesterUsername\": \"kevindurant\",\r\n    \"targetUsername\": \"stephcurry\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/send-friend-request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"send-friend-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPendingRequests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjYwNTQ5MzYsImlkZW50aXR5TmFtZSI6InVzZXIjc3RlcGhjdXJyeSIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9.bET8ynijnaqrXMPSWY6_dT08SpL75pl_CA9_uOqKG3E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "ResourceName",
+								"value": "UserPendingFriend#user#stephcurry",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"stephcurry\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/get-pending-requests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"get-pending-requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMyFriendRequests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjYwNTUxNjQsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.o2MZn7rDxXX-Eewn6qVQPzd6NWAkhs7DsZWBYh9sQ-0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "ResourceName",
+								"value": "UserFriendRequest#user#kevindurant",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/get-my-friend-requests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"get-my-friend-requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ApproveFriendRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjYwNTQ2NzMsImlkZW50aXR5TmFtZSI6InVzZXIjdHJhZXlvdW5nIiwiand0VGtuSXNzdWVyIjoiR3VsdWd1bHUuY29tIn0.yGivfSphBz9ZbmRC-CDAfpVzPrB3WULEvPs6paofl2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "ResourceName",
+								"value": "UserFriendRequest#user#traeyoung",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"createdAt\": \"000858557184725\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/approve-friend-request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"approve-friend-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CancelFriendRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjYwNTQ5MzYsImlkZW50aXR5TmFtZSI6InVzZXIjc3RlcGhjdXJyeSIsImp3dFRrbklzc3VlciI6Ikd1bHVndWx1LmNvbSJ9.bET8ynijnaqrXMPSWY6_dT08SpL75pl_CA9_uOqKG3E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "ResourceName",
+								"value": "UserPendingFriend#user#stephcurry",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"stephcurry\",\r\n    \"createdAt\": \"000858556256453\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/cancel-friend-request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"cancel-friend-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RejectFriendRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjYwNTUxNjQsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.o2MZn7rDxXX-Eewn6qVQPzd6NWAkhs7DsZWBYh9sQ-0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "ResourceName",
+								"value": "UserFriendRequest#user#kevindurant",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"createdAt\": \"000858556574561\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/reject-friend-request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"reject-friend-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFriends",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjYwNTQyMjMsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.pfBdS3wJLYBfYccT1kp-WTxY3m5oGUvJG80cptTctx8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "ResourceName",
+								"value": "UserFriend#user#kevindurant",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"startFriendUsername\": \"\",\r\n    \"pageSize\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friend/get-friends",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friend",
+								"get-friends"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "GetList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjYxMzc5MjQsImlkZW50aXR5TmFtZSI6InVzZXIjdHJhZXlvdW5nIiwiand0VGtuSXNzdWVyIjoiR3VsdWd1bHUuY29tIn0.ViB5SakPK65Ej4YV5G9E6ZCZha2F5GYSe1CmhFVO2EM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "ResourceName",
+								"value": "UserNotification#user#traeyoung",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"traeyoung\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/notification/get-list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"notification",
+								"get-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetNotification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWxsRXhwaXJlQXQiOjE2NjYwMjY0OTcsImlkZW50aXR5TmFtZSI6InVzZXIja2V2aW5kdXJhbnQiLCJqd3RUa25Jc3N1ZXIiOiJHdWx1Z3VsdS5jb20ifQ.J0iSJKAunAUp5Cv3wlTMvUS41aSWDeLaQKxfmXaEIBM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"kevindurant\",\r\n    \"startCreatedAt\": \"000000000000000\",\r\n    \"pageSize\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/notification/ack-list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"notification",
+								"ack-list"
 							]
 						}
 					},

@@ -5,28 +5,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class AuthUserLoginRequestModel implements IJsonSerializable {
+public class UserFriendListRequestModel implements IJsonSerializable {
     @NotNull(message = "Username must not be null")
     @NotEmpty(message = "Username must not be empty")
     @Size(min = 6, max = 30, message = "Username must be 6-30 chars")
-    @Pattern(regexp = "^[A-Za-z0-9_]*$", message = "Username must match set regex")
     private String username;
 
-    @NotNull(message = "Password must not be null")
-    @NotEmpty(message = "Password must not be empty")
-    @Size(min = 6, message = "Password must be at least 6 chars")
-    @Pattern(regexp = "^[A-Za-z0-9_!@./#&+]*$", message = "Password must match set regex")
-    private String password;
+    @NotNull(message = "StartFriendUsername must not be null")
+    private String startFriendUsername;
 
-    public AuthUserLoginRequestModel() {
+    @NotNull
+    private int pageSize;
+
+    public UserFriendListRequestModel() {
     }
 
-    public AuthUserLoginRequestModel(String username, String password) {
+    public UserFriendListRequestModel(String username, String startFriendUsername, int pageSize) {
         this.username = username;
-        this.password = password;
+        this.startFriendUsername = startFriendUsername;
+        this.pageSize = pageSize;
     }
 
     public String getUsername() {
@@ -37,12 +36,20 @@ public class AuthUserLoginRequestModel implements IJsonSerializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getStartFriendUsername() {
+        return startFriendUsername;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setStartFriendUsername(String startFriendUsername) {
+        this.startFriendUsername = startFriendUsername;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     @Override

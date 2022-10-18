@@ -20,6 +20,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Component
@@ -94,12 +96,30 @@ public class RequirePermissionFilter implements Filter {
     }
 
     private String _GetRequiredPermission(String uri) {
-        for (var uriPrefix : Constants.PermissionProtectedURIPrefixes.keySet()) {
+        var permissionProtectedURIPrefixes = _GetPermissionProtectedURIPrefixes();
+        for (var uriPrefix : permissionProtectedURIPrefixes.keySet()) {
             if (uri.startsWith(uriPrefix)) {
-                return Constants.PermissionProtectedURIPrefixes.get(uriPrefix);
+                return permissionProtectedURIPrefixes.get(uriPrefix);
             }
         }
         return null;
+    }
+
+    private Map<String, String> _GetPermissionProtectedURIPrefixes() {
+        var map = new HashMap<String, String>();
+        map.put("/api/v1/user-profile/get", Constants.PermissionNames.UserProfile_GetProfile);
+        map.put("/api/v1/user-profile/update", Constants.PermissionNames.UserProfile_UpdateProfile);
+        map.put("/api/v1/user-credentials/update", Constants.PermissionNames.UserCredentials_UpdateCredentials);
+        map.put("/api/v1/friend/send-friend-request", Constants.PermissionNames.UserPendingFriend_SendRequest);
+        map.put("/api/v1/friend/get-pending-requests", Constants.PermissionNames.UserPendingFriend_GetRequest);
+        map.put("/api/v1/friend/get-my-friend-requests", Constants.PermissionNames.UserFriendRequest_GetRequest);
+        map.put("/api/v1/friend/approve-friend-request", Constants.PermissionNames.UserFriendRequest_RespondRequest);
+        map.put("/api/v1/friend/reject-friend-request", Constants.PermissionNames.UserFriendRequest_RespondRequest);
+        map.put("/api/v1/friend/cancel-friend-request", Constants.PermissionNames.UserPendingFriend_CancelRequest);
+        map.put("/api/v1/friend/get-friends", Constants.PermissionNames.UserFriend_GetFriends);
+        map.put("/api/v1/notification", Constants.PermissionNames.UserNotification_GetNotification);
+
+        return map;
     }
 
     private boolean _HasRequiredPermission(
@@ -108,10 +128,9 @@ public class RequirePermissionFilter implements Filter {
             String resourceName,
             String httpUri) {
         try {
-            var resourceNameFormatBasedOnHttpUri = Constants
-                    .URIPrefixResourceNamePrefixMap
-                    .get(Constants
-                            .URIPrefixResourceNamePrefixMap
+            var resourceNamePrefixes = _GetURIPrefixResourceNamePrefixMap();
+            var resourceNameFormatBasedOnHttpUri = resourceNamePrefixes
+                    .get(_GetURIPrefixResourceNamePrefixMap()
                             .keySet()
                             .stream()
                             .map(s -> s.replace("%s", ""))
@@ -151,5 +170,21 @@ public class RequirePermissionFilter implements Filter {
             logger.error("_HasRequiredPermission thrown an error, possibly doesn't have the required permission");
             return false;
         }
+    }
+
+    private Map<String, String> _GetURIPrefixResourceNamePrefixMap() {
+        var map = new HashMap<String, String>();
+        map.put("/api/v1/user-profile", Constants.PermissionNames.ResourceNameFormats.UserProfile);
+        map.put("/api/v1/user-credentials", Constants.PermissionNames.ResourceNameFormats.UserCredentials);
+        map.put("/api/v1/friend/send-friend-request", Constants.PermissionNames.ResourceNameFormats.UserPendingFriend);
+        map.put("/api/v1/friend/get-pending-requests", Constants.PermissionNames.ResourceNameFormats.UserPendingFriend);
+        map.put("/api/v1/friend/get-my-friend-requests", Constants.PermissionNames.ResourceNameFormats.UserFriendRequest);
+        map.put("/api/v1/friend/approve-friend-request", Constants.PermissionNames.ResourceNameFormats.UserFriendRequest);
+        map.put("/api/v1/friend/reject-friend-request", Constants.PermissionNames.ResourceNameFormats.UserFriendRequest);
+        map.put("/api/v1/friend/cancel-friend-request", Constants.PermissionNames.ResourceNameFormats.UserPendingFriend);
+        map.put("/api/v1/friend/get-friends", Constants.PermissionNames.ResourceNameFormats.UserFriend);
+        map.put("/api/v1/notification", Constants.PermissionNames.ResourceNameFormats.UserNotification);
+
+        return map;
     }
 }
