@@ -2,7 +2,6 @@ package com.mrkresnofatihdev.gulugulu.middlewares;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mrkresnofatihdev.gulugulu.models.ResponseModel;
-import com.mrkresnofatihdev.gulugulu.utilities.Constants;
 import com.mrkresnofatihdev.gulugulu.utilities.JwtHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +17,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -56,7 +57,7 @@ public class RequireAuthenticationFilter implements Filter {
                     logger.info("Finishing Method: RequireAuthenticationFilter.doFilter!");
                     return;
                 }
-                logger.warn("Token is invalid or unhandled exception in JWT verification!");
+                logger.warn("Token is expired, invalid, or unhandled exception in JWT verification!");
             }
         }
 
@@ -73,11 +74,21 @@ public class RequireAuthenticationFilter implements Filter {
     }
 
     private boolean _MustGoThruAuthentication(String uri) {
-        for(var uriPrefix : Constants.AuthProtectedURIPrefixes) {
+        var authProtectedURIPrefixes = _GetAuthProtectedURIPrefixes();
+        for(var uriPrefix : authProtectedURIPrefixes) {
             if (uri.startsWith(uriPrefix)) {
                 return true;
             }
         }
         return false;
+    }
+
+    private List<String> _GetAuthProtectedURIPrefixes() {
+        var list = new ArrayList<String>();
+        list.add("/api/v1/user-profile");
+        list.add("/api/v1/user-credentials");
+        list.add("/api/v1/friend");
+        list.add("/api/v1/notification");
+        return list;
     }
 }

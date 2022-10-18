@@ -69,7 +69,7 @@ public class AuthService implements IAuthService {
         }
         catch (Exception e) {
             logger.error("Failed when saving user credentials!");
-            throw e;
+            return;
         }
 
         logger.info("Starting saving user profile to db");
@@ -83,7 +83,7 @@ public class AuthService implements IAuthService {
         }
         catch (Exception e) {
             logger.error("Failed when saving user profile!");
-            throw e;
+            return;
         }
 
         logger.info("Starting saving identity profile to db");
@@ -94,7 +94,7 @@ public class AuthService implements IAuthService {
         }
         catch (Exception e) {
             logger.error("Failed when saving identity profile!");
-            throw e;
+            return;
         }
 
         logger.info("Starting initialize basic permissions for new user");
@@ -118,7 +118,7 @@ public class AuthService implements IAuthService {
         }
         catch (Exception e) {
             logger.error("Failed when saving permission GetProfile");
-            throw e;
+            return;
         }
 
         try {
@@ -141,7 +141,7 @@ public class AuthService implements IAuthService {
         }
         catch (Exception e) {
             logger.error("Failed when saving permission UpdateProfile");
-            throw e;
+            return;
         }
 
         try {
@@ -164,7 +164,168 @@ public class AuthService implements IAuthService {
         }
         catch (Exception e) {
             logger.error("Failed when saving permission UpdateCredentials");
-            throw e;
+            return;
+        }
+
+        try {
+            logger.info("Create SendRequest Permission!");
+            var username = authUserSignupReq
+                    .getUsername();
+            var permissionName = Constants.PermissionNames.UserPendingFriend_SendRequest;
+            var userProfilePermissionCreateReq = new IdentityPermissionCreateRequestModel();
+            userProfilePermissionCreateReq.setPermissionName(permissionName);
+            var identityName = identityProfileService
+                    .GetIdentityNameOfUser(username);
+            userProfilePermissionCreateReq.setIdentityName(identityName);
+            List<String> resourceNames = List.of(
+                    String.format(Constants.PermissionNames.ResourceNameFormats.UserPendingFriend, identityName)
+            );
+            userProfilePermissionCreateReq.setResourceNames(resourceNames);
+            var createResponse = identityPermissionService
+                    .CreatePermission(userProfilePermissionCreateReq);
+            logger.info(String.format("Create Permission Done w/ response: %s", createResponse.toJsonSerialized()));
+        }
+        catch (Exception e) {
+            logger.error("Failed when saving permission SendRequest");
+            return;
+        }
+
+        try {
+            logger.info("Create GetPendingFriend Permission!");
+            var username = authUserSignupReq
+                    .getUsername();
+            var permissionName = Constants.PermissionNames.UserPendingFriend_GetRequest;
+            var userProfilePermissionCreateReq = new IdentityPermissionCreateRequestModel();
+            userProfilePermissionCreateReq.setPermissionName(permissionName);
+            var identityName = identityProfileService
+                    .GetIdentityNameOfUser(username);
+            userProfilePermissionCreateReq.setIdentityName(identityName);
+            List<String> resourceNames = List.of(
+                    String.format(Constants.PermissionNames.ResourceNameFormats.UserPendingFriend, identityName)
+            );
+            userProfilePermissionCreateReq.setResourceNames(resourceNames);
+            var createResponse = identityPermissionService
+                    .CreatePermission(userProfilePermissionCreateReq);
+            logger.info(String.format("Create Permission Done w/ response: %s", createResponse.toJsonSerialized()));
+        }
+        catch (Exception e) {
+            logger.error("Failed when saving permission GetPendingFriend");
+            return;
+        }
+
+        try {
+            logger.info("Create GetFriendRequest Permission!");
+            var username = authUserSignupReq
+                    .getUsername();
+            var permissionName = Constants.PermissionNames.UserFriendRequest_GetRequest;
+            var userProfilePermissionCreateReq = new IdentityPermissionCreateRequestModel();
+            userProfilePermissionCreateReq.setPermissionName(permissionName);
+            var identityName = identityProfileService
+                    .GetIdentityNameOfUser(username);
+            userProfilePermissionCreateReq.setIdentityName(identityName);
+            List<String> resourceNames = List.of(
+                    String.format(Constants.PermissionNames.ResourceNameFormats.UserFriendRequest, identityName)
+            );
+            userProfilePermissionCreateReq.setResourceNames(resourceNames);
+            var createResponse = identityPermissionService
+                    .CreatePermission(userProfilePermissionCreateReq);
+            logger.info(String.format("Create Permission Done w/ response: %s", createResponse.toJsonSerialized()));
+        }
+        catch (Exception e) {
+            logger.error("Failed when saving permission GetFriendRequest");
+            return;
+        }
+
+        try {
+            logger.info("Create RespondFriendRequest Permission!");
+            var username = authUserSignupReq
+                    .getUsername();
+            var permissionName = Constants.PermissionNames.UserFriendRequest_RespondRequest;
+            var userProfilePermissionCreateReq = new IdentityPermissionCreateRequestModel();
+            userProfilePermissionCreateReq.setPermissionName(permissionName);
+            var identityName = identityProfileService
+                    .GetIdentityNameOfUser(username);
+            userProfilePermissionCreateReq.setIdentityName(identityName);
+            List<String> resourceNames = List.of(
+                    String.format(Constants.PermissionNames.ResourceNameFormats.UserFriendRequest, identityName)
+            );
+            userProfilePermissionCreateReq.setResourceNames(resourceNames);
+            var createResponse = identityPermissionService
+                    .CreatePermission(userProfilePermissionCreateReq);
+            logger.info(String.format("Create Permission Done w/ response: %s", createResponse.toJsonSerialized()));
+        }
+        catch (Exception e) {
+            logger.error("Failed when saving permission RespondFriendRequest");
+            return;
+        }
+
+        try {
+            logger.info("Create CancelPendingFriend Permission!");
+            var username = authUserSignupReq
+                    .getUsername();
+            var permissionName = Constants.PermissionNames.UserPendingFriend_CancelRequest;
+            var userProfilePermissionCreateReq = new IdentityPermissionCreateRequestModel();
+            userProfilePermissionCreateReq.setPermissionName(permissionName);
+            var identityName = identityProfileService
+                    .GetIdentityNameOfUser(username);
+            userProfilePermissionCreateReq.setIdentityName(identityName);
+            List<String> resourceNames = List.of(
+                    String.format(Constants.PermissionNames.ResourceNameFormats.UserPendingFriend, identityName)
+            );
+            userProfilePermissionCreateReq.setResourceNames(resourceNames);
+            var createResponse = identityPermissionService
+                    .CreatePermission(userProfilePermissionCreateReq);
+            logger.info(String.format("Create Permission Done w/ response: %s", createResponse.toJsonSerialized()));
+        }
+        catch (Exception e) {
+            logger.error("Failed when saving permission CancelPendingFriend");
+            return;
+        }
+
+        try {
+            logger.info("Create GetFriends Permission!");
+            var username = authUserSignupReq
+                    .getUsername();
+            var permissionName = Constants.PermissionNames.UserFriend_GetFriends;
+            var userProfilePermissionCreateReq = new IdentityPermissionCreateRequestModel();
+            userProfilePermissionCreateReq.setPermissionName(permissionName);
+            var identityName = identityProfileService
+                    .GetIdentityNameOfUser(username);
+            userProfilePermissionCreateReq.setIdentityName(identityName);
+            List<String> resourceNames = List.of(
+                    String.format(Constants.PermissionNames.ResourceNameFormats.UserFriend, identityName)
+            );
+            userProfilePermissionCreateReq.setResourceNames(resourceNames);
+            var createResponse = identityPermissionService
+                    .CreatePermission(userProfilePermissionCreateReq);
+            logger.info(String.format("Create Permission Done w/ response: %s", createResponse.toJsonSerialized()));
+        }
+        catch (Exception e) {
+            logger.error("Failed when saving permission GetFriends");
+            return;
+        }
+
+        try {
+            logger.info("Create GetUserNotifications Permission!");
+            var username = authUserSignupReq
+                    .getUsername();
+            var permissionName = Constants.PermissionNames.UserNotification_GetNotification;
+            var userProfilePermissionCreateReq = new IdentityPermissionCreateRequestModel();
+            userProfilePermissionCreateReq.setPermissionName(permissionName);
+            var identityName = identityProfileService
+                    .GetIdentityNameOfUser(username);
+            userProfilePermissionCreateReq.setIdentityName(identityName);
+            List<String> resourceNames = List.of(
+                    String.format(Constants.PermissionNames.ResourceNameFormats.UserNotification, identityName)
+            );
+            userProfilePermissionCreateReq.setResourceNames(resourceNames);
+            var createResponse = identityPermissionService
+                    .CreatePermission(userProfilePermissionCreateReq);
+            logger.info(String.format("Create GetUserNotifications Done w/ response: %s", createResponse.toJsonSerialized()));
+        }
+        catch (Exception e) {
+            logger.error("Failed when saving permission GetUserNotifications");
+            return;
         }
 
         logger.info("Finishing method: UserSignup");

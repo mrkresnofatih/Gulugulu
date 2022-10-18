@@ -10,34 +10,27 @@ public class Constants {
         public static final String UserProfileAvatar = "https://i.imgur.com/hlMIFj7.jpg";
     }
 
-    public static final List<String> AuthProtectedURIPrefixes = List
-            .of(
-                    "/api/v1/user-profile",
-                    "/api/v1/user-credentials",
-                    "/api/v1/friend"
-            );
-
-    public static final Map<String, String> PermissionProtectedURIPrefixes = Map.of(
-            "/api/v1/user-profile/get", PermissionNames.UserProfile_GetProfile,
-            "/api/v1/user-profile/update", PermissionNames.UserProfile_UpdateProfile,
-            "/api/v1/user-credentials/update", PermissionNames.UserCredentials_UpdateCredentials
-    );
-
-    public static final Map<String, String> URIPrefixResourceNamePrefixMap = Map.of(
-            "/api/v1/user-profile", PermissionNames.ResourceNameFormats.UserProfile,
-            "/api/v1/user-credentials", PermissionNames.ResourceNameFormats.UserCredentials
-    );
-
     public static class PermissionNames
     {
         public static final String UserProfile_GetProfile = "UserProfile.GetProfile";
         public static final String UserProfile_UpdateProfile = "UserProfile.UpdateProfile";
         public static final String UserCredentials_UpdateCredentials = "UserCredentials.UpdateCredentials";
+        public static final String UserPendingFriend_SendRequest = "UserPendingFriend.SendRequest";
+        public static final String UserPendingFriend_GetRequest = "UserPendingFriend.GetRequest";
+        public static final String UserPendingFriend_CancelRequest = "UserPendingFriend.CancelRequest";
+        public static final String UserFriendRequest_RespondRequest = "UserFriendRequest.RespondRequest";
+        public static final String UserFriendRequest_GetRequest = "UserFriendRequest.GetRequest";
+        public static final String UserFriend_GetFriends = "UserFriend.GetFriends";
+        public static final String UserNotification_GetNotification = "UserNotification.GetNotification";
 
         public static class ResourceNameFormats
         {
             public static final String UserProfile = "UserProfile#%s";
             public static final String UserCredentials = "UserCredentials#%s";
+            public static final String UserPendingFriend = "UserPendingFriend#%s";
+            public static final String UserFriendRequest = "UserFriendRequest#%s";
+            public static final String UserFriend = "UserFriend#%s";
+            public static final String UserNotification = "UserNotification#%s";
         }
     }
 

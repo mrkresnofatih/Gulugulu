@@ -51,7 +51,7 @@ public class FriendService implements IFriendService {
         }
         catch (Exception e) {
             logger.error("Failed to retrieve profile of request sender or target user");
-            throw e;
+            return;
         }
 
         try {
@@ -105,7 +105,7 @@ public class FriendService implements IFriendService {
         }
         catch (Exception e) {
             logger.error(String.format("Failed to create friend request of %s", targetUserProfile.getUsername()));
-            throw e;
+            return;
         }
         logger.info(String.format("Successfully created friend request: %s", createdFriendRequest.toJsonSerialized()));
 
@@ -120,7 +120,7 @@ public class FriendService implements IFriendService {
         }
         catch (Exception e) {
             logger.error(String.format("Failed to create pending friend of %s", requesterProfile.getUsername()));
-            throw e;
+            return;
         }
         logger.info(String.format("Successfully created friend request: %s", createdPendingFriend.toJsonSerialized()));
 
@@ -165,62 +165,67 @@ public class FriendService implements IFriendService {
     @Override
     public void CancelSendFriendRequest(FriendCancelSendFriendRequestModel friendCancelSendFriendRequest) {
         logger.info(String.format("Start method: CancelSendFriendRequest w/ param: %s", friendCancelSendFriendRequest.toJsonSerialized()));
-        var foundUserPendingFriend = userPendingFriendService
-                .GetPendingFriend(
-                        new UserPendingFriendGetRequestModel(
-                                friendCancelSendFriendRequest.getUsername(),
-                                friendCancelSendFriendRequest.getCreatedAt()));
-        logger.info("Found user pending friend");
-        var requesterUsername = friendCancelSendFriendRequest.getUsername();
-        var friendUsername = foundUserPendingFriend.getFriendUsername();
-        var isFriendRequestFound = false;
-        var startCreatedAt = "000000000000000";
-        var loopFinish = false;
-        UserFriendRequestGetResponseModel foundUserFriendRequest = null;
-        while (!isFriendRequestFound && !loopFinish) {
-            var friendRequestList = userFriendRequestService
-                    .GetFriendRequestList(new UserFriendRequestListRequestModel(
-                            friendUsername,
-                            startCreatedAt,
-                            20
-                    ));
-            var friendReqMap = friendRequestList.stream()
-                    .collect(Collectors.toMap(UserFriendRequestGetResponseModel::getRequesterUsername, s -> s));
-            if (friendReqMap.keySet().size() < 20) {
-                if (friendReqMap.containsKey(requesterUsername)) {
-                    logger.info("Found user friend request");
-                    foundUserFriendRequest = friendReqMap.get(requesterUsername);
-                }
-                loopFinish = true;
-            } else {
-                if (friendReqMap.containsKey(requesterUsername)) {
-                    logger.info("Found user friend request");
-                    foundUserFriendRequest = friendReqMap.get(requesterUsername);
+        try {
+            var foundUserPendingFriend = userPendingFriendService
+                    .GetPendingFriend(
+                            new UserPendingFriendGetRequestModel(
+                                    friendCancelSendFriendRequest.getUsername(),
+                                    friendCancelSendFriendRequest.getCreatedAt()));
+            logger.info("Found user pending friend");
+            var requesterUsername = friendCancelSendFriendRequest.getUsername();
+            var friendUsername = foundUserPendingFriend.getFriendUsername();
+            var isFriendRequestFound = false;
+            var startCreatedAt = "000000000000000";
+            var loopFinish = false;
+            UserFriendRequestGetResponseModel foundUserFriendRequest = null;
+            while (!isFriendRequestFound && !loopFinish) {
+                var friendRequestList = userFriendRequestService
+                        .GetFriendRequestList(new UserFriendRequestListRequestModel(
+                                friendUsername,
+                                startCreatedAt,
+                                20
+                        ));
+                var friendReqMap = friendRequestList.stream()
+                        .collect(Collectors.toMap(UserFriendRequestGetResponseModel::getRequesterUsername, s -> s));
+                if (friendReqMap.keySet().size() < 20) {
+                    if (friendReqMap.containsKey(requesterUsername)) {
+                        logger.info("Found user friend request");
+                        foundUserFriendRequest = friendReqMap.get(requesterUsername);
+                    }
                     loopFinish = true;
                 } else {
-                    startCreatedAt = friendRequestList.get(19).getCreatedAt();
+                    if (friendReqMap.containsKey(requesterUsername)) {
+                        logger.info("Found user friend request");
+                        foundUserFriendRequest = friendReqMap.get(requesterUsername);
+                        loopFinish = true;
+                    } else {
+                        startCreatedAt = friendRequestList.get(19).getCreatedAt();
+                    }
                 }
             }
-        }
 
-        if (!Objects.isNull(foundUserFriendRequest)) {
-            userFriendRequestService.DeleteFriendRequest(new UserFriendRequestGetRequestModel(
-                    foundUserFriendRequest.getUsername(),
-                    foundUserFriendRequest.getCreatedAt()
-            ));
-            logger.info("deleted user friend request");
-        } else {
-            logger.warn("Failed to find friend request that we're trying to delete, probably already deleted");
-        }
+            if (!Objects.isNull(foundUserFriendRequest)) {
+                userFriendRequestService.DeleteFriendRequest(new UserFriendRequestGetRequestModel(
+                        foundUserFriendRequest.getUsername(),
+                        foundUserFriendRequest.getCreatedAt()
+                ));
+                logger.info("deleted user friend request");
+            } else {
+                logger.warn("Failed to find friend request that we're trying to delete, probably already deleted");
+            }
 
-        userPendingFriendService
-                .DeletePendingFriend(
-                        new UserPendingFriendGetRequestModel(
-                                foundUserPendingFriend.getUsername(),
-                                foundUserPendingFriend.getCreatedAt()
-                        ));
-        logger.info("deleted user pending friend");
-        logger.info("Finished method: CancelSendFriendRequest");
+            userPendingFriendService
+                    .DeletePendingFriend(
+                            new UserPendingFriendGetRequestModel(
+                                    foundUserPendingFriend.getUsername(),
+                                    foundUserPendingFriend.getCreatedAt()
+                            ));
+            logger.info("deleted user pending friend");
+            logger.info("Finished method: CancelSendFriendRequest");
+        }
+        catch (Exception e) {
+            logger.error("Something went wrong: " + e.getMessage());
+        }
     }
 
     @Override
@@ -254,42 +259,52 @@ public class FriendService implements IFriendService {
     @Override
     public void ApproveReceivedFriendRequest(FriendRespondFriendRequestModel friendRespondFriendRequest) {
         logger.info(String.format("Start method: ApproveReceivedFriendRequest w/ params: %s", friendRespondFriendRequest.toJsonSerialized()));
-        var requesterUsername = _RemoveFriendRequestsGetRequester(friendRespondFriendRequest);
-        var requestedUserFriend = userFriendService
-                .SaveUserFriend(
-                        new UserFriendCreateRequestModel(
-                                friendRespondFriendRequest.getUsername(),
-                                requesterUsername)
-                );
-        logger.info(String.format("successfully created user friend for requested friend w/ response: %s", requestedUserFriend.toJsonSerialized()));
+        try {
+            var requesterUsername = _RemoveFriendRequestsGetRequester(friendRespondFriendRequest);
+            var requestedUserFriend = userFriendService
+                    .SaveUserFriend(
+                            new UserFriendCreateRequestModel(
+                                    friendRespondFriendRequest.getUsername(),
+                                    requesterUsername)
+                    );
+            logger.info(String.format("successfully created user friend for requested friend w/ response: %s", requestedUserFriend.toJsonSerialized()));
 
-        var requesterUserFriend = userFriendService
-                .SaveUserFriend(
-                        new UserFriendCreateRequestModel(
-                                requesterUsername,
-                                friendRespondFriendRequest.getUsername()
-                        )
-                );
-        logger.info(String.format("successfully created user friend for requester w/ response: %s", requesterUserFriend.toJsonSerialized()));
+            var requesterUserFriend = userFriendService
+                    .SaveUserFriend(
+                            new UserFriendCreateRequestModel(
+                                    requesterUsername,
+                                    friendRespondFriendRequest.getUsername()
+                            )
+                    );
+            logger.info(String.format("successfully created user friend for requester w/ response: %s", requesterUserFriend.toJsonSerialized()));
 
-        var approverProfile = userProfileService
-                .GetUserProfile(
-                        new UserProfileGetRequestModel(friendRespondFriendRequest.getUsername()));
-        var friendReqApprovedNotificationCreateRequest = new FriendRequestApprovedNotificationCreateModel(
-                requesterUsername,
-                approverProfile.getUsername(),
-                approverProfile.getAvatar()
-        );
-        var createdNotification = userNotificationService.CreateUserNotification(friendReqApprovedNotificationCreateRequest);
-        logger.info(String.format("Created friend-request-approved notification w/ response: %s", createdNotification.toJsonSerialized()));
-        logger.info("Finish method: ApproveReceivedFriendRequest");
+            var approverProfile = userProfileService
+                    .GetUserProfile(
+                            new UserProfileGetRequestModel(friendRespondFriendRequest.getUsername()));
+            var friendReqApprovedNotificationCreateRequest = new FriendRequestApprovedNotificationCreateModel(
+                    requesterUsername,
+                    approverProfile.getUsername(),
+                    approverProfile.getAvatar()
+            );
+            var createdNotification = userNotificationService.CreateUserNotification(friendReqApprovedNotificationCreateRequest);
+            logger.info(String.format("Created friend-request-approved notification w/ response: %s", createdNotification.toJsonSerialized()));
+            logger.info("Finish method: ApproveReceivedFriendRequest");
+        }
+        catch (Exception e) {
+            logger.error("Something went wrong: " + e.getMessage());
+        }
     }
 
     @Override
     public void RejectReceivedFriendRequest(FriendRespondFriendRequestModel friendRespondFriendRequest) {
         logger.info(String.format("Start method: RejectReceivedFriendRequest w/ params: %s", friendRespondFriendRequest.toJsonSerialized()));
-        _RemoveFriendRequestsGetRequester(friendRespondFriendRequest);
-        logger.info("Finish method: RejectReceivedFriendRequest");
+        try {
+            _RemoveFriendRequestsGetRequester(friendRespondFriendRequest);
+            logger.info("Finish method: RejectReceivedFriendRequest");
+        }
+        catch (Exception e) {
+            logger.error("Something went wrong: " + e.getMessage());
+        }
     }
 
     @Override
